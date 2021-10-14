@@ -17,6 +17,9 @@
 	</strong>
 </p>
 
+
+Modified fork of original : Use Serial COMPORT for data communication instead of HID
+
 I’m <a href="https://twitter.com/maxim_xyz?lang=en">Maxim xyz</a> and when my best friend Gabriel Combe and I were 15 years old we built our own VR headset because we couldn't afford to buy one.
 
 5 years later : this headset became Relativty.
