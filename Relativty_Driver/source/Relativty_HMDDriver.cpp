@@ -69,6 +69,7 @@ std::wstring stringToWstring(const std::string& t_str)
 }
 
 vr::EVRInitError Relativty::HMDDriver::Activate(uint32_t unObjectId) {
+	Relativty::ServerDriver::Log("HMD ACTIV\n");
 	RelativtyDevice::Activate(unObjectId);
 	this->setProperties();
 	if (this->bIsStaticRotation) {
@@ -95,14 +96,23 @@ vr::EVRInitError Relativty::HMDDriver::Activate(uint32_t unObjectId) {
 		}
 	}
 
+	Relativty::ServerDriver::Log("ARCH| moving on?\n");
+
 	this->retrieve_quaternion_isOn = true;
 	this->retrieve_quaternion_thread_worker = std::thread(&Relativty::HMDDriver::retrieve_device_quaternion_packet_threaded, this);
 	
 
 	if (this->start_tracking_server) {
+		//Relativty::ServerDriver::Log("ARCH|BEGIN Waiting for socket server readiness\n");
+		//Relativty::SocketServer sss;
+		//while (sss.readyness == false) {
+			//do nothing
+		//}
+
 		this->retrieve_vector_isOn = true;
 		this->retrieve_vector_thread_worker = std::thread(&Relativty::HMDDriver::retrieve_client_vector_packet_threaded, this);
 		while (this->serverNotReady) {
+			Relativty::ServerDriver::Log("ARCH| Waiting for socket server readiness...\n");
 			// do nothing
 		}
 		//this->startPythonTrackingClient_worker = std::thread(startPythonTrackingClient_threaded, this->PyPath);
@@ -222,6 +232,9 @@ void Relativty::HMDDriver::update_pose_threaded() {
 			m_Pose.vecPosition[1] = this->vector_xyz[1];
 			m_Pose.vecPosition[2] = this->vector_xyz[2];
 			Relativty::ServerDriver::Log("ARCH|\tVector Received\n");
+			Relativty::ServerDriver::Log("ARCH| V| X " + std::to_string(vector_xyz[0]));
+			Relativty::ServerDriver::Log("ARCH| V| Y " + std::to_string(vector_xyz[1]));
+			Relativty::ServerDriver::Log("ARCH| V| Z " + std::to_string(vector_xyz[2]));
 			vr::VRServerDriverHost()->TrackedDevicePoseUpdated(m_unObjectId, m_Pose, sizeof(vr::DriverPose_t));
 			this->new_vector_avaiable = false;
 
@@ -412,13 +425,6 @@ void Relativty::HMDDriver::retrieve_device_quaternion_packet_threaded() {
 }
 
 void Relativty::HMDDriver::retrieve_client_vector_packet_threaded() {
-	WSADATA wsaData;
-	struct sockaddr_in server, client;
-	int addressLen;
-	int receiveBufferLen = 128;
-	char receiveBuffer[128];
-	int resultReceiveLen;
-
 	float normalize_min[3]{ this->normalizeMinX, this->normalizeMinY, this->normalizeMinZ};
 	float normalize_max[3]{ this->normalizeMaxX, this->normalizeMaxY, this->normalizeMaxZ};
 	float scales_coordinate_meter[3]{ this->scalesCoordinateMeterX, this->scalesCoordinateMeterY, this->scalesCoordinateMeterZ};
@@ -437,28 +443,41 @@ void Relativty::HMDDriver::retrieve_client_vector_packet_threaded() {
 
 	this->serverNotReady = false;
 
+
 	Relativty::ServerDriver::Log("Thread3: successfully started\n");
 	while (this->retrieve_vector_isOn) {
 		if (bIsStaticPosition) {
 			continue;
 		}
 		//get blue coordinates :
-		Relativty::SocketServer sss;
-		SocketServer::deviceState state = sss.getState('B');
-		float *coordinate = state.coordinate;
-		//if (applyCoordinates) {
-		//float *coordinate = state.coordinate;
-		const float mod = fScaleBy;
-		Relativty::ServerDriver::Log("ARCH| SOCKET| scale by " + std::to_string(fScaleBy));
-		coordinate[0] = coordinate[0] * mod;
-		coordinate[1] = coordinate[1] * mod;
-		coordinate[2] = coordinate[2] * mod;
-		Relativty::ServerDriver::Log("ARCH| SOCKET| normie");
-		Normalize(coordinate_normalized, coordinate, normalize_max, normalize_min, this->upperBound, this->lowerBound, scales_coordinate_meter, offset_coordinate);
-		this->vector_xyz[0] = coordinate_normalized[1];
-		this->vector_xyz[1] = coordinate_normalized[2];
-		this->vector_xyz[2] = coordinate_normalized[0];
-		this->new_vector_avaiable = true;
+		bool isBAvailale = Relativty::ServerDriver::SOCKServer.isAvailable('B');
+		if(isBAvailale){
+			Relativty::ServerDriver::Log("ARCH| HMD| would get state of 'B' : " + std::to_string(isBAvailale) + "\n");
+			Relativty::ServerDriver::Log("ARCH| HMD| get state of 'B'\n");
+			SocketServer::deviceState state = Relativty::ServerDriver::SOCKServer.getState('B');
+			float coordinate[3];
+			float *coordinateCapture = state.coordinate;
+			coordinate[0] = coordinateCapture[0];
+			coordinate[1] = coordinateCapture[1];
+			coordinate[2] = coordinateCapture[2];
+			Relativty::ServerDriver::Log("ARCH| B| got out X " + std::to_string(coordinate[0]));
+			Relativty::ServerDriver::Log("ARCH| B| got out Y " + std::to_string(coordinate[1]));
+			Relativty::ServerDriver::Log("ARCH| B| got out Z " + std::to_string(coordinate[2]));
+			//if (applyCoordinates) {
+			const float mod = fScaleBy;
+			Relativty::ServerDriver::Log("ARCH| SOCKET| scale by " + std::to_string(fScaleBy));
+			coordinate[0] = coordinate[0] * mod;
+			coordinate[1] = coordinate[1] * mod;
+			coordinate[2] = coordinate[2] * mod;
+			Relativty::ServerDriver::Log("ARCH| SOCKET| normie");
+			Normalize(coordinate_normalized, coordinate, normalize_max, normalize_min, this->upperBound, this->lowerBound, scales_coordinate_meter, offset_coordinate);
+			this->vector_xyz[0] = coordinate_normalized[1];
+			this->vector_xyz[1] = coordinate_normalized[2];
+			this->vector_xyz[2] = coordinate_normalized[0];
+			this->new_vector_avaiable = true;
+		}
+		/*
+		*/
 		//}
 			
 		//quaternion here :
@@ -471,6 +490,7 @@ void Relativty::HMDDriver::retrieve_client_vector_packet_threaded() {
 		//this->calibrate_quaternion();
 
 		//this->new_quaternion_avaiable = true;
+
 	}
 	Relativty::ServerDriver::Log("Thread3: successfully stopped\n");
 }
@@ -530,6 +550,7 @@ Relativty::HMDDriver::HMDDriver(std::string myserial):RelativtyDevice(myserial, 
 	this->PyPath = buffer;
 
 	// this is a bad idea, this should be set by the tracking loop
+	Relativty::ServerDriver::Log("Init HMDDevice constructor\n");
 	m_Pose.result = vr::TrackingResult_Running_OK;
 }
 

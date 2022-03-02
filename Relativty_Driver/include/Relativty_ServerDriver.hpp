@@ -17,10 +17,14 @@
 #ifndef RELATIVTY_SERVERDRIVER_H
 #define RELATIVTY_SERVERDRIVER_H
 
+#include <thread>
+#include <atomic>
 #include "openvr_driver.h"
 #include "Relativty_HMDDriver.hpp"
 #include "Relativty_CTRLDriver.hpp"
 #include "Relativty_SocketServer.hpp"
+
+static std::exception_ptr globalExceptionPtr = nullptr;
 
 namespace Relativty {
 	class ServerDriver : public vr::IServerTrackedDeviceProvider
@@ -35,8 +39,11 @@ namespace Relativty {
 		virtual void LeaveStandby() override;
 
 		static void Log(std::string log);
-		static SocketServer SOCKServer;
+		inline static SocketServer SOCKServer = SocketServer();
 	private:
+		std::thread test_worker_thread;
+		void worker_threader();
+
 		HMDDriver* HMDDriver = nullptr;
 		CTRLDriver* CTRLDriver = nullptr;
 	};

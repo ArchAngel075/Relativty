@@ -12,7 +12,8 @@ namespace Relativty {
 	class SocketServer
 	{
 	private:
-		std::thread cycle_receive_parse_packets_thread_worker;
+		
+		bool run_thread = true;
 		struct positionPacket {
 			float X;
 			float Y;
@@ -33,18 +34,22 @@ namespace Relativty {
 		};
 
 		char rgbToChar(float R, float G, float B);
-		int fd;
 		SOCKET sock;
 		SOCKET sock_receive[3];
-		bool bIsStaticPosition = false;
+		std::atomic<bool> bIsStaticPosition = false;
 
-		float coordinate[3][3]{ { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } };
+		std::atomic<float> coordinate[3][3]{ { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } };
 
-		int colID[3] = { 0,1,2 };
-		char colChar[3] = { 'R','G','B' };
+		std::atomic<int> colID[3] = { 0,1,2 };
+		std::atomic<char> colChar[3] = { 'R','G','B' };
 
-		float buttons[3][8] = { { 0,0,0,0,0,0,0,0 },{ 0,0,0,0,0,0,0,0 }, { 0,0,0,0,0,0,0,0 } };
+		std::atomic<float> buttons[3][8] = { { 0,0,0,0,0,0,0,0 },{ 0,0,0,0,0,0,0,0 }, { 0,0,0,0,0,0,0,0 } };
+
+		std::atomic<bool> freshState[3] = { false, false, false };
 	public:
+		std::thread cycle_receive_parse_packets_thread_worker;
+		void cycle();
+		std::atomic<bool> readyness = false;
 		struct deviceState {
 			float* coordinate;
 			float* button;
@@ -52,7 +57,7 @@ namespace Relativty {
 		
 
 		void open();
-		void cycle();
+		
 
 		void parsePacket(const char* packet);
 
@@ -68,10 +73,11 @@ namespace Relativty {
 
 		void close();
 
+		bool isAvailable(int id);
+		bool isAvailable(char id);
+
 		deviceState getState(int id);
 		deviceState getState(char id);
-
-		char* lastPacket;
 	};
 
 }

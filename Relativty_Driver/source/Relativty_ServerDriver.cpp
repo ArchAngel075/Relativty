@@ -36,10 +36,14 @@ vr::EVRInitError Relativty::ServerDriver::Init(vr::IVRDriverContext* DriverConte
 	#endif
 
 	this->Log("Relativty Init successful.\n");
-	
+	this->Log("Relativty Start Socket Server.\n");
+	Relativty::ServerDriver::SOCKServer.open();
+	this->Log("Relativty Socket Server Started.\n");
+
 	this->Log("Relativty boot HMD device.\n");
 	this->HMDDriver = new Relativty::HMDDriver("zero");
 	vr::VRServerDriverHost()->TrackedDeviceAdded(HMDDriver->GetSerialNumber().c_str(), vr::ETrackedDeviceClass::TrackedDeviceClass_HMD, this->HMDDriver);
+
 
 	//this->Log("Relativty boot CTRL device.\n");
 	//this->CTRLDriver = new Relativty::CTRLDriver("one");
@@ -53,6 +57,21 @@ vr::EVRInitError Relativty::ServerDriver::Init(vr::IVRDriverContext* DriverConte
 }
 
 void Relativty::ServerDriver::Cleanup() {
+	if (globalExceptionPtr)
+	{
+		try
+		{
+			std::rethrow_exception(globalExceptionPtr);
+		}
+		catch (const std::exception& ex)
+		{
+			std::string err = std::string(ex.what());
+			this->Log("Thread failed with exception. " + err + "\n");
+		}
+	}
+	Relativty::SocketServer sss;
+	sss.close();
+
 	delete this->HMDDriver;
 	this->HMDDriver = NULL;
 
@@ -86,4 +105,23 @@ void Relativty::ServerDriver::LeaveStandby() {
 
 void Relativty::ServerDriver::Log(std::string log) {
 	vr::VRDriverLog()->Log(log.c_str());
+}
+
+void Relativty::ServerDriver::worker_threader()
+{
+	while (true) {
+		if (globalExceptionPtr)
+		{
+			this->Log("Thread failed with exception....\n");
+			try
+			{
+				std::rethrow_exception(globalExceptionPtr);
+			}
+			catch (const std::exception& ex)
+			{
+				std::string err = std::string(ex.what());
+				this->Log("Thread failed with exception. " + err + "\n");
+			}
+		}
+	}
 }
