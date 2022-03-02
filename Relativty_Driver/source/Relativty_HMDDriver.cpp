@@ -33,6 +33,8 @@
 #include "Relativty_components.h"
 #include "Relativty_base_device.h"
 
+#include "Relativty_SocketServer.hpp"
+
 #include <errno.h>
 #include <string>
 
@@ -422,203 +424,42 @@ void Relativty::HMDDriver::retrieve_client_vector_packet_threaded() {
 	float scales_coordinate_meter[3]{ this->scalesCoordinateMeterX, this->scalesCoordinateMeterY, this->scalesCoordinateMeterZ};
 	float offset_coordinate[3] = { this->offsetCoordinateX, this->offsetCoordinateY, this->offsetCoordinateZ};
 
-	float coordinate[3]{ 0, 0, 0 };
+	//float coordinate[3]{ 0,0,0 };
+
+
 	float coordinate_normalized[3];
 
-	Relativty::ServerDriver::Log("Thread3: Initialising Socket.\n");
-	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
-		Relativty::ServerDriver::Log("Thread3: Failed. Error Code: " + WSAGetLastError());
-		return;
-	}
-	Relativty::ServerDriver::Log("Thread3: Socket successfully initialised.\n");
+	Relativty::ServerDriver::Log("Thread3: Initialising Socket Server.\n");
 
-	if (!bIsStaticPosition && (this->sock = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET)
-		Relativty::ServerDriver::Log("Thread3: could not create socket: " + WSAGetLastError());
-	Relativty::ServerDriver::Log("Thread3: Socket created.\n");
 
-	server.sin_family = AF_INET;
-	server.sin_port = htons(50000);
-	server.sin_addr.s_addr = INADDR_ANY;
-
-	if (!bIsStaticPosition && bind(this->sock, (struct sockaddr*) & server, sizeof(server)) == SOCKET_ERROR)
-		Relativty::ServerDriver::Log("Thread3: Bind failed with error code: " + WSAGetLastError());
-	Relativty::ServerDriver::Log("Thread3: Bind done \n");
-	//Relativty::ServerDriver::Log("ARCH| HMD| SOCK|A track? " + std::to_string(bIsTrackingA) + "\n");
-	//Relativty::ServerDriver::Log("ARCH| HMD| SOCK|B track? " + std::to_string(bIsTrackingB) + "\n");
-
-	if (!bIsStaticPosition) {
-		int countListen = 1;
-		if (bIsTrackingA && bIsTrackingB) {
-			countListen = 2;
-		}
-		listen(this->sock, countListen);
-	}
+	//if (!bIsStaticPosition) {
+	//}
 
 	this->serverNotReady = false;
 
-	if (!bIsStaticPosition) {
-		Relativty::ServerDriver::Log("Thread3: Waiting for incoming connections...\n");
-		addressLen = sizeof(struct sockaddr_in);
-		if (bIsTrackingA) {
-			this->sock_receiveA = accept(this->sock, (struct sockaddr*) & client, &addressLen);
-			if (this->sock_receiveA == INVALID_SOCKET)
-				Relativty::ServerDriver::Log("Thread3: accept failed with error code: " + WSAGetLastError());
-			Relativty::ServerDriver::Log("Thread3: Connection A accepted");
-		}
-		if (bIsTrackingB) {
-			this->sock_receiveB = accept(this->sock, (struct sockaddr*) & client, &addressLen);
-			if (this->sock_receiveB == INVALID_SOCKET)
-				Relativty::ServerDriver::Log("Thread3: accept failed with error code: " + WSAGetLastError());
-			Relativty::ServerDriver::Log("Thread3: Connection B accepted");
-		}
-	}
-	
 	Relativty::ServerDriver::Log("Thread3: successfully started\n");
 	while (this->retrieve_vector_isOn) {
-		bool applyCoordinates = false;
 		if (bIsStaticPosition) {
 			continue;
 		}
-		Relativty::ServerDriver::Log("ARCH| HMD| SOCK|A track? " + std::to_string(bIsTrackingA) + "\n");
-		if (bIsTrackingA)
-		{
-			//Relativty::ServerDriver::Log("ARCH| HMD| SOCK|A start\n");
-			resultReceiveLen = recv(this->sock_receiveA, receiveBuffer, receiveBufferLen, NULL);
-			if (resultReceiveLen == -1) {
-				fprintf(stderr, "recv: %s (%d)\n", strerror(errno), errno);
-				Relativty::ServerDriver::Log("ARCH| HMD| SOCK|A recv error [" + std::to_string(errno) + "].");
-				continue;
-			}
-			if (resultReceiveLen > 0) {
-				std::string receiveString = std::string(receiveBuffer);
-				Relativty::ServerDriver::Log("ARCH| SOCKET|A RAW Received '" + receiveString + "'\n");
-				size_t opens = receiveString.find("{");
-				if (opens != 0) {
-					Relativty::ServerDriver::Log("ARCH| SOCKET|A incomplete packet. Discarding'\n");
-					continue;
-				}
-				size_t close = receiveString.find("}") + 1;
-				receiveString.resize(close);
-				Relativty::ServerDriver::Log("ARCH| SOCKET|A packet length : " + std::to_string(receiveString.length()) + "\n");
-				if (receiveString.length() < 7) {
-					Relativty::ServerDriver::Log("ARCH| SOCKET|A Bad packet length. Discarding'\n");
-					continue;
-				}
-				// declaring character array
-				const char* cstr = receiveString.c_str();
-				float xf = float(cstr[1]);
-				float yf = float(cstr[2]);
-				float sf = float(cstr[3]);
-				float ii = int(cstr[4]);
-
-				float rf = float(cstr[5]);
-				float gf = float(cstr[6]);
-				float bf = float(cstr[7]);
-				Relativty::ServerDriver::Log("ARCH| SOCKET|A Received '" + std::string(cstr) + "'\n");
-				Relativty::ServerDriver::Log("ARCH| SOCKET|A X '" + std::to_string(xf) + "'\n");
-				Relativty::ServerDriver::Log("ARCH| SOCKET|A Y '" + std::to_string(yf) + "'\n");
-				Relativty::ServerDriver::Log("ARCH| SOCKET|A S '" + std::to_string(sf) + "'\n");
-				Relativty::ServerDriver::Log("ARCH| SOCKET|A I '" + std::to_string(ii) + "'\n");
-				Relativty::ServerDriver::Log("ARCH| SOCKET|A R '" + std::to_string(rf) + "'\n");
-				Relativty::ServerDriver::Log("ARCH| SOCKET|A G '" + std::to_string(gf) + "'\n");
-				Relativty::ServerDriver::Log("ARCH| SOCKET|A B '" + std::to_string(bf) + "'\n");
-				if (ii == 1) {//the front side camera
-					coordinate[0] = xf*-1;
-					coordinate[1] = coordinate[1];
-					coordinate[2] = yf*-1;
-					applyCoordinates = true;
-				}
-				if (ii == 2) {//the right side camera
-					coordinate[0] = coordinate[0];
-					coordinate[1] = xf;
-					coordinate[2] = coordinate[2];
-					applyCoordinates = true;
-				}
-			}
-		}
-
-
-		Relativty::ServerDriver::Log("ARCH| HMD| SOCK|B track? " + std::to_string(bIsTrackingB) + "\n");
-		//second :
-		if (bIsTrackingB) 
-		{
-			//Relativty::ServerDriver::Log("ARCH| HMD| SOCK|B start\n");
-			resultReceiveLen = recv(this->sock_receiveB, receiveBuffer, receiveBufferLen, NULL);
-			if (resultReceiveLen == -1) {
-				fprintf(stderr, "recv: %s (%d)\n", strerror(errno), errno);
-				Relativty::ServerDriver::Log("ARCH| HMD| SOCK|B recv error [" + std::to_string(errno) + "].");
-				continue;
-			}
-			if (resultReceiveLen > 0) {
-				std::string receiveString = std::string(receiveBuffer);
-				Relativty::ServerDriver::Log("ARCH| SOCKET|B RAW Received '" + receiveString + "'\n");
-				size_t opens = receiveString.find("{");
-				if (opens != 0) {
-					Relativty::ServerDriver::Log("ARCH| SOCKET|B incomplete packet. Discarding'\n");
-					continue;
-				}
-				size_t close = receiveString.find("}") + 1;
-				receiveString.resize(close);
-				Relativty::ServerDriver::Log("ARCH| SOCKET|B packet length : " + std::to_string(receiveString.length()) + "\n");
-				if (receiveString.length() < 7) {
-					Relativty::ServerDriver::Log("ARCH| SOCKET|B Bad packet length. Discarding'\n");
-					continue;
-				}
-				// declaring character array
-				const char* cstr = receiveString.c_str();
-				float xf = float(cstr[1]);
-				float yf = float(cstr[2]);
-				float sf = int(cstr[3]);
-				float ii = int(cstr[4]);
-
-				float rf = float(cstr[5]);
-				float gf = float(cstr[6]);
-				float bf = float(cstr[7]);
-				Relativty::ServerDriver::Log("ARCH| SOCKET|B Received '" + std::string(cstr) + "'\n");
-				Relativty::ServerDriver::Log("ARCH| SOCKET|B X '" + std::to_string(xf) + "'\n");
-				Relativty::ServerDriver::Log("ARCH| SOCKET|B Y '" + std::to_string(yf) + "'\n");
-				Relativty::ServerDriver::Log("ARCH| SOCKET|B S '" + std::to_string(sf) + "'\n");
-				Relativty::ServerDriver::Log("ARCH| SOCKET|B I '" + std::to_string(ii) + "'\n");
-				Relativty::ServerDriver::Log("ARCH| SOCKET|B R '" + std::to_string(rf) + "'\n");
-				Relativty::ServerDriver::Log("ARCH| SOCKET|B G '" + std::to_string(gf) + "'\n");
-				Relativty::ServerDriver::Log("ARCH| SOCKET|B B '" + std::to_string(bf) + "'\n");
-				if (ii == 1) {//the front side camera
-					coordinate[0] = xf*-1;
-					coordinate[1] = coordinate[1];
-					coordinate[2] = yf*-1;
-					applyCoordinates = true;
-				}
-				if (ii == 2) {//the right side camera
-					coordinate[0] = coordinate[0];
-					coordinate[1] = xf;
-					coordinate[2] = coordinate[2];
-					applyCoordinates = true;
-				}
-			}
-		}
-
-		/*
-		nlohmann::json json = nlohmann::json::parse(receiveString);
-		Relativty::ServerDriver::Log("ARCH| SOCKET| read in json prettty value as '" + json.dump() + "'\n");
-		coordinate[0] = json["px"].get<float>();
-		Relativty::ServerDriver::Log("ARCH| SOCKET| get y");
-		coordinate[1] = json["py"].get<float>();
-		Relativty::ServerDriver::Log("ARCH| SOCKET| get z");
-		coordinate[2] = json["pz"].get<float>();
-		*/
-		if (applyCoordinates) {
-			const float mod = fScaleBy;
-			Relativty::ServerDriver::Log("ARCH| SOCKET| scale by " + std::to_string(fScaleBy));
-			coordinate[0] = coordinate[0] * mod;
-			coordinate[1] = coordinate[1] * mod;
-			coordinate[2] = coordinate[2] * mod;
-			Relativty::ServerDriver::Log("ARCH| SOCKET| normie");
-			Normalize(coordinate_normalized, coordinate, normalize_max, normalize_min, this->upperBound, this->lowerBound, scales_coordinate_meter, offset_coordinate);
-			this->vector_xyz[0] = coordinate_normalized[1];
-			this->vector_xyz[1] = coordinate_normalized[2];
-			this->vector_xyz[2] = coordinate_normalized[0];
-			this->new_vector_avaiable = true;
-		}
+		//get blue coordinates :
+		Relativty::SocketServer sss;
+		SocketServer::deviceState state = sss.getState('B');
+		float *coordinate = state.coordinate;
+		//if (applyCoordinates) {
+		//float *coordinate = state.coordinate;
+		const float mod = fScaleBy;
+		Relativty::ServerDriver::Log("ARCH| SOCKET| scale by " + std::to_string(fScaleBy));
+		coordinate[0] = coordinate[0] * mod;
+		coordinate[1] = coordinate[1] * mod;
+		coordinate[2] = coordinate[2] * mod;
+		Relativty::ServerDriver::Log("ARCH| SOCKET| normie");
+		Normalize(coordinate_normalized, coordinate, normalize_max, normalize_min, this->upperBound, this->lowerBound, scales_coordinate_meter, offset_coordinate);
+		this->vector_xyz[0] = coordinate_normalized[1];
+		this->vector_xyz[1] = coordinate_normalized[2];
+		this->vector_xyz[2] = coordinate_normalized[0];
+		this->new_vector_avaiable = true;
+		//}
 			
 		//quaternion here :
 		//this->quat[0] = json["qw"].get<float>();
@@ -637,7 +478,6 @@ void Relativty::HMDDriver::retrieve_client_vector_packet_threaded() {
 Relativty::HMDDriver::HMDDriver(std::string myserial):RelativtyDevice(myserial, "akira_") {
 	// keys for use with the settings API
 	static const char* const Relativty_hmd_section = "Relativty_hmd";
-
 	// openvr api stuff
 	m_sRenderModelPath = "{Relativty}/rendermodels/generic_hmd";
 	m_sBindPath = "{Relativty}/input/relativty_hmd_profile.json";

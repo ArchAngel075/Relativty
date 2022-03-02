@@ -1,6 +1,15 @@
 #pragma once
+#include <thread>
+#include <atomic>
+#include <WinSock2.h>
+#include "hidapi/hidapi.h"
+#include "openvr_driver.h"
+#include "Relativty_components.h"
+#include "Relativty_base_device.h"
+#include <codecvt>
+
 namespace Relativty {
-	class Relativty_SocketServer
+	class SocketServer
 	{
 	private:
 		std::thread cycle_receive_parse_packets_thread_worker;
@@ -9,7 +18,7 @@ namespace Relativty {
 			float Y;
 			float S;
 			int colID;
-			float CamID;
+			int CamID;
 		};
 		struct inputPacket {
 			int colID;
