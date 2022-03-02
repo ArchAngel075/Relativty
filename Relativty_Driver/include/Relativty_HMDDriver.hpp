@@ -21,6 +21,8 @@
 #include "openvr_driver.h"
 #include "Relativty_components.h"
 #include "Relativty_base_device.h"
+#include <codecvt>
+
 
 namespace Relativty {
 	class HMDDriver : public RelativtyDevice<false>
@@ -32,13 +34,29 @@ namespace Relativty {
 		void frameUpdate();
 		inline void setProperties();
 
+		void closeCom();
+		void openCom();
+
+		void openSocket();
+		void closeSocket();
+
 		// Inherited from RelativtyDevice, to be overridden
 		virtual vr::EVRInitError Activate(uint32_t unObjectId);
 		virtual void Deactivate();
 
 	private:
+		vr::VRInputComponentHandle_t HButtons[6], HAnalog[3];
 		int32_t m_iPid;
 		int32_t m_iVid;
+		std::wstring comport;
+		std::string comportRAW;
+		bool bIsSerialComport;
+		bool bIsTrackingA;
+		bool bIsTrackingB;
+		bool bIsStaticPosition;
+		bool bIsStaticRotation;
+
+		float fScaleBy;
 
 		bool m_bIMUpktIsDMP;
 
@@ -49,6 +67,7 @@ namespace Relativty {
 
 		vr::DriverPose_t lastPose = {0};
 		hid_device* handle;
+		HANDLE serialHandle;
 
 		std::atomic<float> quat[4];
 		std::atomic<bool> retrieve_quaternion_isOn = false;
@@ -63,8 +82,8 @@ namespace Relativty {
 		std::atomic<float> vector_xyz[3];
 		std::atomic<bool> retrieve_vector_isOn = false;
 		std::atomic<bool> new_vector_avaiable = false;
-		bool start_tracking_server = false;
-		SOCKET sock, sock_receive;
+		bool start_tracking_server = true;
+		SOCKET sock, sock_receiveA, sock_receiveB;
 		float upperBound;
 		float lowerBound;
 

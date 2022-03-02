@@ -19,6 +19,7 @@
 
 #include "openvr_driver.h"
 #include "Relativty_HMDDriver.hpp"
+#include "Relativty_CTRLDriver.hpp"
 
 namespace Relativty {
 	class ServerDriver : public vr::IServerTrackedDeviceProvider
@@ -35,6 +36,7 @@ namespace Relativty {
 		static void Log(std::string log);
 	private:
 		HMDDriver* HMDDriver = nullptr;
+		CTRLDriver* CTRLDriver = nullptr;
 	};
 }
 

@@ -83,7 +83,7 @@
     <OutDir>$(SolutionDir)Relativty\bin\win64</OutDir>
     <IntDir>$(ProjectName)$(Platform)\$(Configuration)\</IntDir>
     <LibraryPath>$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(WindowsSDK_IncludePath);$(VC_IncludePath);$(SolutionDir)include;$(SolutionDir)include\Python;$(SolutionDir)include\OpenVR;$(SolutionDir)include\hidapi;$(IncludePath)</IncludePath>
+    <IncludePath>$(WindowsSDK_IncludePath);$(VC_IncludePath);$(SolutionDir)include;$(SolutionDir)include\Python;$(SolutionDir)include\OpenVR;$(SolutionDir)include\hidapi;$(SolutionDir)include\nlohmann;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -174,15 +174,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\Relativty_SocketServer.cpp" />
     <ClCompile Include="source\DriverFactory.cpp" />
+    <ClCompile Include="source\Relativty_CTRLDriver.cpp" />
     <ClCompile Include="source\Relativty_EmbeddedPython.cpp" />
     <ClCompile Include="source\Relativty_HMDDriver.cpp" />
     <ClCompile Include="source\Relativty_ServerDriver.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Relativty_CTRLDriver.hpp" />
     <ClInclude Include="include\Relativty_EmbeddedPython.h" />
     <ClInclude Include="include\Relativty_HMDDriver.hpp" />
     <ClInclude Include="include\Relativty_ServerDriver.hpp" />
+    <ClInclude Include="include\Relativty_SocketServer.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

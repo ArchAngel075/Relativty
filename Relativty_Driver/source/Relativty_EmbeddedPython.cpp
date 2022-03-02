@@ -28,15 +28,32 @@
 namespace fs = std::filesystem;
 
 void startPythonTrackingClient_threaded(std::string PyPath) {
-	std::string fileName = PyPath + "/Client.py";
-	FILE* fp;
-	fp = fopen(fileName.c_str(), "rb");
+	Relativty::ServerDriver::Log("Thread4: ARCH| python init\n");
+	std::string fileName = PyPath + "/main.py";
+	//FILE* fp;
+	//fp = fopen(fileName.c_str(), "rb");
 
 	std::string singleQuote = "\'";
 	PyPath = "PyPATH = " + singleQuote + PyPath + singleQuote;
+	Relativty::ServerDriver::Log("Thread4: ARCH| Client at '" + PyPath + "'\n");
+	/*
 	Py_Initialize();
-	PyRun_SimpleString(PyPath.c_str());
+	PyRun_SimpleString("import sys");
+	Relativty::ServerDriver::Log("Thread4: ARCH| python path setup\n");
+	PyRun_SimpleString("sys.path.append('C:\\Users\\Arch\\Documents\\SteamVR\\pyRGBDetect')");
+	Relativty::ServerDriver::Log("Thread4: ARCH| script running\n");
+	//PyRun_SimpleString(PyPath.c_str());
 	Relativty::ServerDriver::Log("Thread4: starting Client.py \n");
-	PyRun_AnyFileExFlags(fp, "Client.py", 0, NULL);
+	int code = PyRun_AnyFileExFlags(fp, "C:\\Users\\Arch\\Documents\\SteamVR\\pyRGBDetect\\hsv_v2.py", 0, NULL);
+	*/
+	char filename[] = "C:\\Users\\Arch\\Documents\\SteamVR\\pyRGBDetect\\hsv_v2.py";
+	FILE* fp;
+	Py_Initialize();
+
+	fp = _Py_fopen(filename, "r");
+	PyRun_SimpleFile(fp, filename);
+
+	Py_Finalize();
+	Relativty::ServerDriver::Log("Thread4: ARCH| exit '\n");
 	Py_Finalize();
 }

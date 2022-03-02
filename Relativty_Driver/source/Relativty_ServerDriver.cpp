@@ -19,6 +19,7 @@
 
 #include "Relativty_ServerDriver.hpp"
 #include "Relativty_HMDDriver.hpp"
+#include "Relativty_CTRLDriver.hpp"
 
 vr::EVRInitError Relativty::ServerDriver::Init(vr::IVRDriverContext* DriverContext) {
 
@@ -28,7 +29,7 @@ vr::EVRInitError Relativty::ServerDriver::Init(vr::IVRDriverContext* DriverConte
 	}
 	#ifdef DRIVERLOG_H
 	InitDriverLog(vr::VRDriverLog());
-	DriverLog("Relativty driver version 0.1.1"); // report driver version
+	DriverLog("Relativty driver version 0.1.1 | Modified v2"); // report driver version
 	DriverLog("Thread1: hid quaternion packet listener loop");
 	DriverLog("Thread2: update driver pose loop");
 	DriverLog("Thread3: receive positional data from python loop");
@@ -36,8 +37,16 @@ vr::EVRInitError Relativty::ServerDriver::Init(vr::IVRDriverContext* DriverConte
 
 	this->Log("Relativty Init successful.\n");
 	
+	this->Log("Relativty boot HMD device.\n");
 	this->HMDDriver = new Relativty::HMDDriver("zero");
 	vr::VRServerDriverHost()->TrackedDeviceAdded(HMDDriver->GetSerialNumber().c_str(), vr::ETrackedDeviceClass::TrackedDeviceClass_HMD, this->HMDDriver);
+
+	//this->Log("Relativty boot CTRL device.\n");
+	//this->CTRLDriver = new Relativty::CTRLDriver("one");
+	//vr::VRServerDriverHost()->TrackedDeviceAdded(CTRLDriver->GetSerialNumber().c_str(), vr::ETrackedDeviceClass::TrackedDeviceClass_Controller, this->CTRLDriver);
+
+	
+	//vr::VRServerDriverHost()->TrackedDeviceAdded
 	// GetSerialNumber() is there for a reason!
 
 	return vr::VRInitError_None;
@@ -46,6 +55,9 @@ vr::EVRInitError Relativty::ServerDriver::Init(vr::IVRDriverContext* DriverConte
 void Relativty::ServerDriver::Cleanup() {
 	delete this->HMDDriver;
 	this->HMDDriver = NULL;
+
+	delete this->CTRLDriver;
+	this->CTRLDriver = NULL;
 
 	#ifdef DRIVERLOG_H
 	CleanupDriverLog();

@@ -1,4 +1,4 @@
-// Copyright (C) 2020  Max Coutte, Gabriel Combe
+rd// Copyright (C) 2020  Max Coutte, Gabriel Combe
 // Copyright (C) 2020  Relativty.com
 //
 // This program is free software: you can redistribute it and/or modify
@@ -79,12 +79,12 @@ void setup() {
   mpu.testConnection();
   devStatus = mpu.dmpInitialize();
   
-  mpu.setXGyroOffset(51);
-  mpu.setYGyroOffset(8);
-  mpu.setZGyroOffset(21);
+  mpu.setXGyroOffset(220);
+  mpu.setYGyroOffset(76);
+  mpu.setZGyroOffset(-85);
   mpu.setXAccelOffset(1150);
   mpu.setYAccelOffset(-50);
-  mpu.setZAccelOffset(1060);
+  mpu.setZAccelOffset(1788);
   
   if (devStatus == 0) {
     mpu.CalibrateAccel(6);
