@@ -50,5 +50,8 @@
     <ClInclude Include="include\Relativty_SocketServer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Kabsch\KabschModule.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

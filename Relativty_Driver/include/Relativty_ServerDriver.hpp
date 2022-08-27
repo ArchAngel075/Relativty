@@ -38,7 +38,7 @@ namespace Relativty {
 		virtual void EnterStandby() override;
 		virtual void LeaveStandby() override;
 
-		static void Log(std::string log);
+		static void Log(std::string log, bool shall=false);
 		inline static SocketServer SOCKServer = SocketServer();
 	private:
 		std::thread test_worker_thread;

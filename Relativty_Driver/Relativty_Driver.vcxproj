@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -83,7 +83,7 @@
     <OutDir>$(SolutionDir)Relativty\bin\win64</OutDir>
     <IntDir>$(ProjectName)$(Platform)\$(Configuration)\</IntDir>
     <LibraryPath>$(SolutionDir)libraries\$(Platform);$(SolutionDir)libraries;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(WindowsSDK_IncludePath);$(VC_IncludePath);$(SolutionDir)include;$(SolutionDir)include\Python;$(SolutionDir)include\OpenVR;$(SolutionDir)include\hidapi;$(SolutionDir)include\nlohmann;$(IncludePath)</IncludePath>
+    <IncludePath>$(WindowsSDK_IncludePath);$(VC_IncludePath);$(SolutionDir)include;$(SolutionDir)include\Python;$(SolutionDir)include\OpenVR;$(SolutionDir)include\hidapi;$(SolutionDir)include\nlohmann;C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\install\include\eigen3;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -122,8 +122,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>
-      </AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\boost_1_78_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -182,6 +181,7 @@
     <ClCompile Include="source\Relativty_ServerDriver.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Kabsch\KabschModule.hpp" />
     <ClInclude Include="include\Relativty_CTRLDriver.hpp" />
     <ClInclude Include="include\Relativty_EmbeddedPython.h" />
     <ClInclude Include="include\Relativty_HMDDriver.hpp" />

@@ -44,6 +44,10 @@ namespace Relativty {
 		virtual vr::EVRInitError Activate(uint32_t unObjectId);
 		virtual void Deactivate();
 
+		float OX = 0;
+		float OY = 0;
+		float OZ = 0;
+
 	private:
 		vr::VRInputComponentHandle_t HButtons[6], HAnalog[3];
 		int32_t m_iPid;
@@ -57,6 +61,8 @@ namespace Relativty {
 		bool bIsStaticRotation;
 
 		float fScaleBy;
+
+		bool translateAdjust;
 
 		bool m_bIMUpktIsDMP;
 
@@ -95,6 +101,10 @@ namespace Relativty {
 		float normalizeMaxY;
 		float normalizeMaxZ;
 
+		float modX;
+		float modY;
+		float modZ;
+
 		float scalesCoordinateMeterX;
 		float scalesCoordinateMeterY;
 		float scalesCoordinateMeterZ;
@@ -102,6 +112,9 @@ namespace Relativty {
 		float offsetCoordinateX;
 		float offsetCoordinateY;
 		float offsetCoordinateZ;
+
+		float coordinateOrigin[3]{ 0,0,0 };
+		bool resetCoordinateOrigin = true;
 
 		std::atomic<bool> serverNotReady = true;
 		std::thread retrieve_vector_thread_worker;
