@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\doc\examples\make_circulant.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\doc\examples\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{0352A5B6-8B53-316A-B501-A5D35DEB062F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

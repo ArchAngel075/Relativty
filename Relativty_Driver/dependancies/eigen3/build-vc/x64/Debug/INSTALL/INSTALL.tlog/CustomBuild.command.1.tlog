@@ -1,0 +1,10 @@
+^C:\USERS\ARCH\DOCUMENTS\STEAMVR\RELATIVTY\RELATIVTY\RELATIVTY_DRIVER\DEPENDANCIES\EIGEN3\BUILD-VC\CMAKEFILES\F1A4FDD352FD385291F4CBEC1DB0F19B\INSTALL_FORCE.RULE
+setlocal
+cd .
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

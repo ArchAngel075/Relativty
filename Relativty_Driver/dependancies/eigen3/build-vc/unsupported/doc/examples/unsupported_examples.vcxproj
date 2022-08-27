@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{274FC60F-7642-3EA0-8563-044EFF57CC79}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>unsupported_examples</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3;C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\unsupported\doc\examples\..\..\..\unsupported;C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\unsupported\doc\examples\..\..\..\unsupported\test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3;C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\unsupported\doc\examples\..\..\..\unsupported;C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\unsupported\doc\examples\..\..\..\unsupported\test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3;C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\unsupported\doc\examples\..\..\..\unsupported;C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\unsupported\doc\examples\..\..\..\unsupported\test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3;C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\unsupported\doc\examples\..\..\..\unsupported;C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\unsupported\doc\examples\..\..\..\unsupported\test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\unsupported\doc\examples\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/unsupported/doc/examples/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3 -BC:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/build-vc --check-stamp-file C:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/build-vc/unsupported/doc/examples/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\unsupported\doc\examples\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/unsupported/doc/examples/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3 -BC:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/build-vc --check-stamp-file C:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/build-vc/unsupported/doc/examples/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\unsupported\doc\examples\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/unsupported/doc/examples/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3 -BC:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/build-vc --check-stamp-file C:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/build-vc/unsupported/doc/examples/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\unsupported\doc\examples\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/unsupported/doc/examples/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3 -BC:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/build-vc --check-stamp-file C:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/build-vc/unsupported/doc/examples/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\unsupported\doc\examples\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\ZERO_CHECK.vcxproj">
+      <Project>{089E7AF5-246A-3B2A-98DA-EA4C5252F9C9}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\unsupported\doc\examples\example_BVH_Example.vcxproj">
+      <Project>{F106799A-C8AB-37DF-B2D4-86B3C55DC471}</Project>
+      <Name>example_BVH_Example</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\unsupported\doc\examples\example_EulerAngles.vcxproj">
+      <Project>{E36D25C1-745A-3A79-88A7-89E76671C898}</Project>
+      <Name>example_EulerAngles</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\unsupported\doc\examples\example_FFT.vcxproj">
+      <Project>{786FB701-D7A8-3109-B7A0-99C146FC1127}</Project>
+      <Name>example_FFT</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\unsupported\doc\examples\example_MatrixExponential.vcxproj">
+      <Project>{3D776D99-19FF-35BE-BCB7-A93361B8661A}</Project>
+      <Name>example_MatrixExponential</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\unsupported\doc\examples\example_MatrixFunction.vcxproj">
+      <Project>{A1B77E0F-7EC2-3DEF-88FC-77AB11D47F48}</Project>
+      <Name>example_MatrixFunction</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\unsupported\doc\examples\example_MatrixLogarithm.vcxproj">
+      <Project>{01BD6991-D02E-3375-80BD-A967E0C3F648}</Project>
+      <Name>example_MatrixLogarithm</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\unsupported\doc\examples\example_MatrixPower.vcxproj">
+      <Project>{86C47080-F643-33BB-895B-6132A7611A6D}</Project>
+      <Name>example_MatrixPower</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\unsupported\doc\examples\example_MatrixPower_optimal.vcxproj">
+      <Project>{C3FE427E-EEA7-3E8F-AD11-29319AA644FB}</Project>
+      <Name>example_MatrixPower_optimal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\unsupported\doc\examples\example_MatrixSine.vcxproj">
+      <Project>{024D2751-1F4D-39A4-9122-58C3EF26A7DB}</Project>
+      <Name>example_MatrixSine</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\unsupported\doc\examples\example_MatrixSinh.vcxproj">
+      <Project>{D1D253C2-077D-38AE-A2FF-0EF3ADCF59A3}</Project>
+      <Name>example_MatrixSinh</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\unsupported\doc\examples\example_MatrixSquareRoot.vcxproj">
+      <Project>{1BAE4AE0-56CA-3B08-B9E5-506F629E7148}</Project>
+      <Name>example_MatrixSquareRoot</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\unsupported\doc\examples\example_PolynomialSolver1.vcxproj">
+      <Project>{51CB2E1E-6263-3201-A10A-ECFA950B2683}</Project>
+      <Name>example_PolynomialSolver1</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\unsupported\doc\examples\example_PolynomialUtils1.vcxproj">
+      <Project>{F828E21D-1C65-3DCE-B7FC-F2F9512A3D0D}</Project>
+      <Name>example_PolynomialUtils1</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

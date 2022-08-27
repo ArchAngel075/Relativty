@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\CMakeFiles\784baa2410579750eb287374495b655e\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{E66A3691-176E-3DC6-8D67-3CFB9367CA2D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

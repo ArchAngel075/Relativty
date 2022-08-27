@@ -1,0 +1,10 @@
+^C:\USERS\ARCH\DOCUMENTS\STEAMVR\RELATIVTY\RELATIVTY\RELATIVTY_DRIVER\DEPENDANCIES\EIGEN3\BUILD-VC\CMAKEFILES\F1A4FDD352FD385291F4CBEC1DB0F19B\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3 -BC:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/build-vc --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/build-vc/Eigen3.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

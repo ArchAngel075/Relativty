@@ -1,0 +1,1602 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{65CF2E0C-23CB-3EFF-966C-6F1494C09F2B}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\doc\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/doc/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3 -BC:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/build-vc --check-stamp-file C:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/build-vc/doc/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\doc\Doxyfile.in;C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\doc\eigendoxy_footer.html.in;C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\doc\eigendoxy_header.html.in;C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\doc\eigendoxy_layout.xml.in;C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\unsupported\doc\eigendoxy_layout.xml.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/doc/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3 -BC:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/build-vc --check-stamp-file C:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/build-vc/doc/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\doc\Doxyfile.in;C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\doc\eigendoxy_footer.html.in;C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\doc\eigendoxy_header.html.in;C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\doc\eigendoxy_layout.xml.in;C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\unsupported\doc\eigendoxy_layout.xml.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/doc/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3 -BC:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/build-vc --check-stamp-file C:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/build-vc/doc/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\doc\Doxyfile.in;C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\doc\eigendoxy_footer.html.in;C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\doc\eigendoxy_header.html.in;C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\doc\eigendoxy_layout.xml.in;C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\unsupported\doc\eigendoxy_layout.xml.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/doc/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3 -BC:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/build-vc --check-stamp-file C:/Users/Arch/Documents/SteamVR/Relativty/Relativty/Relativty_Driver/dependancies/eigen3/build-vc/doc/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\doc\Doxyfile.in;C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\doc\eigendoxy_footer.html.in;C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\doc\eigendoxy_header.html.in;C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\doc\eigendoxy_layout.xml.in;C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\unsupported\doc\eigendoxy_layout.xml.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\ZERO_CHECK.vcxproj">
+      <Project>{089E7AF5-246A-3B2A-98DA-EA4C5252F9C9}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\CustomizingEigen_Inheritance.vcxproj">
+      <Project>{9094722E-BD5A-384C-B021-389B80EBE97B}</Project>
+      <Name>CustomizingEigen_Inheritance</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Cwise_erf.vcxproj">
+      <Project>{AE017725-341F-3445-BF44-88EA3B1A0842}</Project>
+      <Name>Cwise_erf</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Cwise_erfc.vcxproj">
+      <Project>{E0AF7393-71C6-3BBF-B4ED-66B721C6DE35}</Project>
+      <Name>Cwise_erfc</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Cwise_lgamma.vcxproj">
+      <Project>{8388E39D-1444-3C48-948D-9E1E5FB3A784}</Project>
+      <Name>Cwise_lgamma</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\DenseBase_middleCols_int.vcxproj">
+      <Project>{4E335854-4C82-3FAA-8A47-8F84EC998CE3}</Project>
+      <Name>DenseBase_middleCols_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\DenseBase_middleRows_int.vcxproj">
+      <Project>{5369CACE-F394-3F4D-A99F-0BA75AC34D85}</Project>
+      <Name>DenseBase_middleRows_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\DenseBase_template_int_middleCols.vcxproj">
+      <Project>{AEF407A2-6E85-39C5-9BC6-C41B1460622F}</Project>
+      <Name>DenseBase_template_int_middleCols</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\DenseBase_template_int_middleRows.vcxproj">
+      <Project>{035653A1-D0C4-3479-8A5B-1087096BB1ED}</Project>
+      <Name>DenseBase_template_int_middleRows</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\QuickStart_example.vcxproj">
+      <Project>{B6DEAC74-FCB8-3CB0-A66B-D097226B6D5D}</Project>
+      <Name>QuickStart_example</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\QuickStart_example2_dynamic.vcxproj">
+      <Project>{7C3B509C-4BE7-38E4-ABE5-C4FB1FA633CB}</Project>
+      <Name>QuickStart_example2_dynamic</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\QuickStart_example2_fixed.vcxproj">
+      <Project>{6912F698-32D8-33B9-B72F-75C97D8DEF25}</Project>
+      <Name>QuickStart_example2_fixed</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\TemplateKeyword_flexible.vcxproj">
+      <Project>{63AC732A-9E0C-3431-B336-DE7A0ADFD522}</Project>
+      <Name>TemplateKeyword_flexible</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\TemplateKeyword_simple.vcxproj">
+      <Project>{CE27CF85-BA20-3ACD-A4C9-AD260125873B}</Project>
+      <Name>TemplateKeyword_simple</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\TutorialInplaceLU.vcxproj">
+      <Project>{9874EA7F-B45D-3A69-B45E-495B0F78CF42}</Project>
+      <Name>TutorialInplaceLU</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\TutorialLinAlgComputeTwice.vcxproj">
+      <Project>{E612234C-209D-38A5-9246-A518965ED3E4}</Project>
+      <Name>TutorialLinAlgComputeTwice</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\TutorialLinAlgExComputeSolveError.vcxproj">
+      <Project>{7A3FD45E-4CBE-3393-AC07-33E3F7D1221F}</Project>
+      <Name>TutorialLinAlgExComputeSolveError</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\TutorialLinAlgExSolveColPivHouseholderQR.vcxproj">
+      <Project>{734828F9-E621-33A4-8330-501C042DCF25}</Project>
+      <Name>TutorialLinAlgExSolveColPivHouseholderQR</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\TutorialLinAlgExSolveLDLT.vcxproj">
+      <Project>{99289AFF-0632-3161-8BD7-7D163B6DFAFE}</Project>
+      <Name>TutorialLinAlgExSolveLDLT</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\TutorialLinAlgInverseDeterminant.vcxproj">
+      <Project>{AC0A7EEC-B862-3195-A6E1-D226AB577B22}</Project>
+      <Name>TutorialLinAlgInverseDeterminant</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\TutorialLinAlgRankRevealing.vcxproj">
+      <Project>{663F7D63-A3B1-3EF4-982B-B425CE895A3F}</Project>
+      <Name>TutorialLinAlgRankRevealing</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\TutorialLinAlgSVDSolve.vcxproj">
+      <Project>{E8608661-B1CE-336A-BC1C-E7A03D077220}</Project>
+      <Name>TutorialLinAlgSVDSolve</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\TutorialLinAlgSelfAdjointEigenSolver.vcxproj">
+      <Project>{A55A724B-3146-3ACA-A0C9-59AC8D12F34B}</Project>
+      <Name>TutorialLinAlgSelfAdjointEigenSolver</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\TutorialLinAlgSetThreshold.vcxproj">
+      <Project>{5BD8CFFB-6FBC-3E80-B8CF-C53715459A40}</Project>
+      <Name>TutorialLinAlgSetThreshold</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Tutorial_ArrayClass_accessors.vcxproj">
+      <Project>{67924E2D-8565-34EC-BCDD-7317265B2F20}</Project>
+      <Name>Tutorial_ArrayClass_accessors</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Tutorial_ArrayClass_addition.vcxproj">
+      <Project>{09E88621-B8BC-308D-9173-35686735833F}</Project>
+      <Name>Tutorial_ArrayClass_addition</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Tutorial_ArrayClass_cwise_other.vcxproj">
+      <Project>{C99AD180-74A0-3B7A-B21B-216482345422}</Project>
+      <Name>Tutorial_ArrayClass_cwise_other</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Tutorial_ArrayClass_interop.vcxproj">
+      <Project>{6C4C8218-7A61-3916-AE43-85B9F1927EFD}</Project>
+      <Name>Tutorial_ArrayClass_interop</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Tutorial_ArrayClass_interop_matrix.vcxproj">
+      <Project>{CD9DAB8C-771E-367F-9E4F-4D9620DF77E1}</Project>
+      <Name>Tutorial_ArrayClass_interop_matrix</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Tutorial_ArrayClass_mult.vcxproj">
+      <Project>{DDE3F3C8-A65D-3A08-9882-C04F9D6F560A}</Project>
+      <Name>Tutorial_ArrayClass_mult</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Tutorial_BlockOperations_block_assignment.vcxproj">
+      <Project>{E0E82653-4C8D-3398-8884-8B4EC80350A8}</Project>
+      <Name>Tutorial_BlockOperations_block_assignment</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Tutorial_BlockOperations_colrow.vcxproj">
+      <Project>{F23DF0FE-BEC6-3063-9ABA-465F6BBD781A}</Project>
+      <Name>Tutorial_BlockOperations_colrow</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Tutorial_BlockOperations_corner.vcxproj">
+      <Project>{3B71C075-2A54-3C50-9686-9AFE09F3B53F}</Project>
+      <Name>Tutorial_BlockOperations_corner</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Tutorial_BlockOperations_print_block.vcxproj">
+      <Project>{21CC3AE4-C44E-3E84-B2CC-3F1BA491033F}</Project>
+      <Name>Tutorial_BlockOperations_print_block</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Tutorial_BlockOperations_vector.vcxproj">
+      <Project>{3CDF827A-8563-38E5-8D20-E5EF8EC206F5}</Project>
+      <Name>Tutorial_BlockOperations_vector</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Tutorial_PartialLU_solve.vcxproj">
+      <Project>{B88DE0D2-4FA4-30E3-9CFF-55CBD81B48B0}</Project>
+      <Name>Tutorial_PartialLU_solve</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Tutorial_ReductionsVisitorsBroadcasting_broadcast_1nn.vcxproj">
+      <Project>{53E42595-8648-31F6-8E7E-2494712747CB}</Project>
+      <Name>Tutorial_ReductionsVisitorsBroadcasting_broadcast_1nn</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Tutorial_ReductionsVisitorsBroadcasting_broadcast_simple.vcxproj">
+      <Project>{397E3162-13A4-37E4-B09D-952CF909391E}</Project>
+      <Name>Tutorial_ReductionsVisitorsBroadcasting_broadcast_simple</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Tutorial_ReductionsVisitorsBroadcasting_broadcast_simple_rowwise.vcxproj">
+      <Project>{278C0029-3977-314F-B3CE-A978EE7288A4}</Project>
+      <Name>Tutorial_ReductionsVisitorsBroadcasting_broadcast_simple_rowwise</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Tutorial_ReductionsVisitorsBroadcasting_colwise.vcxproj">
+      <Project>{3770C7BA-4DB8-3662-901A-96594F197E4C}</Project>
+      <Name>Tutorial_ReductionsVisitorsBroadcasting_colwise</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Tutorial_ReductionsVisitorsBroadcasting_maxnorm.vcxproj">
+      <Project>{C810B218-6F57-35B1-B76C-0019CF9545FE}</Project>
+      <Name>Tutorial_ReductionsVisitorsBroadcasting_maxnorm</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Tutorial_ReductionsVisitorsBroadcasting_reductions_bool.vcxproj">
+      <Project>{862AE844-86FB-3F39-95D9-2E58A3024762}</Project>
+      <Name>Tutorial_ReductionsVisitorsBroadcasting_reductions_bool</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Tutorial_ReductionsVisitorsBroadcasting_reductions_norm.vcxproj">
+      <Project>{3C8E03CF-52A0-36EB-AB9A-5A2EDFF584C3}</Project>
+      <Name>Tutorial_ReductionsVisitorsBroadcasting_reductions_norm</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Tutorial_ReductionsVisitorsBroadcasting_reductions_operatornorm.vcxproj">
+      <Project>{BEDB5047-DB87-3836-9FDD-3408864775E3}</Project>
+      <Name>Tutorial_ReductionsVisitorsBroadcasting_reductions_operatornorm</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Tutorial_ReductionsVisitorsBroadcasting_rowwise.vcxproj">
+      <Project>{B503E2B0-75C7-3E1C-97E3-F57ED2B5C06D}</Project>
+      <Name>Tutorial_ReductionsVisitorsBroadcasting_rowwise</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Tutorial_ReductionsVisitorsBroadcasting_visitors.vcxproj">
+      <Project>{2C2FCB68-469C-37CC-BE20-6B0F2B3EECE9}</Project>
+      <Name>Tutorial_ReductionsVisitorsBroadcasting_visitors</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Tutorial_simple_example_dynamic_size.vcxproj">
+      <Project>{1F48471C-B3E1-3ABD-8B3E-14234AEC87B1}</Project>
+      <Name>Tutorial_simple_example_dynamic_size</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\Tutorial_simple_example_fixed_size.vcxproj">
+      <Project>{AE6CE411-5B32-3A7E-918C-B978BD749464}</Project>
+      <Name>Tutorial_simple_example_fixed_size</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\class_Block.vcxproj">
+      <Project>{452FCB29-C3BA-334E-8B66-91982D877B1F}</Project>
+      <Name>class_Block</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\class_CwiseBinaryOp.vcxproj">
+      <Project>{78482DED-9417-3302-8342-FBB5C483C9F2}</Project>
+      <Name>class_CwiseBinaryOp</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\class_CwiseUnaryOp.vcxproj">
+      <Project>{FF0228DA-9385-36EE-A74F-DE83F849D8F7}</Project>
+      <Name>class_CwiseUnaryOp</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\class_CwiseUnaryOp_ptrfun.vcxproj">
+      <Project>{EC1C0166-686C-33C9-BFD0-3730FBAD1C86}</Project>
+      <Name>class_CwiseUnaryOp_ptrfun</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\class_FixedBlock.vcxproj">
+      <Project>{52FA55C0-18FC-3919-839F-2F8266662202}</Project>
+      <Name>class_FixedBlock</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\class_FixedReshaped.vcxproj">
+      <Project>{03CB8522-7DF5-3F18-BC28-BFF1AC498030}</Project>
+      <Name>class_FixedReshaped</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\class_FixedVectorBlock.vcxproj">
+      <Project>{FDB19F3E-4D7D-3861-97DB-6108EC8136C8}</Project>
+      <Name>class_FixedVectorBlock</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\class_Reshaped.vcxproj">
+      <Project>{3A8324E9-CAE1-3588-925A-A28B0826648E}</Project>
+      <Name>class_Reshaped</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\class_VectorBlock.vcxproj">
+      <Project>{DD739FC3-D1F3-3AAA-A265-BC896DECD83B}</Project>
+      <Name>class_VectorBlock</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_AngleAxis_mimic_euler.vcxproj">
+      <Project>{DB279088-C07F-354C-9B5A-5712EB257368}</Project>
+      <Name>compile_AngleAxis_mimic_euler</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_BiCGSTAB_simple.vcxproj">
+      <Project>{F2B9DF25-25E6-324A-855B-D543168D660A}</Project>
+      <Name>compile_BiCGSTAB_simple</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_BiCGSTAB_step_by_step.vcxproj">
+      <Project>{CE4FB12E-986B-344F-9C7D-7E4929CEDEDE}</Project>
+      <Name>compile_BiCGSTAB_step_by_step</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_ColPivHouseholderQR_solve.vcxproj">
+      <Project>{1E04A4F6-0C26-32A5-9830-9B9613803C37}</Project>
+      <Name>compile_ColPivHouseholderQR_solve</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_ComplexEigenSolver_compute.vcxproj">
+      <Project>{59F4BBFF-BFE3-3012-A642-33ADEFB48CF7}</Project>
+      <Name>compile_ComplexEigenSolver_compute</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_ComplexEigenSolver_eigenvalues.vcxproj">
+      <Project>{09897D4A-44CB-391A-AE7F-5950069F44C4}</Project>
+      <Name>compile_ComplexEigenSolver_eigenvalues</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_ComplexEigenSolver_eigenvectors.vcxproj">
+      <Project>{C1555ECD-20B2-3584-84BD-DBBCCBA568A2}</Project>
+      <Name>compile_ComplexEigenSolver_eigenvectors</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_ComplexSchur_compute.vcxproj">
+      <Project>{E04A04BC-9DE0-3D89-BC62-773464C603A8}</Project>
+      <Name>compile_ComplexSchur_compute</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_ComplexSchur_matrixT.vcxproj">
+      <Project>{84865405-10C6-3837-8FC1-E2C12A203FE7}</Project>
+      <Name>compile_ComplexSchur_matrixT</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_ComplexSchur_matrixU.vcxproj">
+      <Project>{1CB239FB-302F-3D68-BA27-5535EF26AFC2}</Project>
+      <Name>compile_ComplexSchur_matrixU</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_abs.vcxproj">
+      <Project>{5A123845-3367-37FA-B762-038E101F30D3}</Project>
+      <Name>compile_Cwise_abs</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_abs2.vcxproj">
+      <Project>{01BD62C7-3000-3218-B5D8-06D54053209F}</Project>
+      <Name>compile_Cwise_abs2</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_acos.vcxproj">
+      <Project>{3854B243-6102-3E3B-8C65-CCB39F542334}</Project>
+      <Name>compile_Cwise_acos</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_arg.vcxproj">
+      <Project>{AEAB1FD1-C094-3C67-8292-34D204FFC847}</Project>
+      <Name>compile_Cwise_arg</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_array_power_array.vcxproj">
+      <Project>{C52D176C-D1D1-3501-8A32-0F78C7D2AC39}</Project>
+      <Name>compile_Cwise_array_power_array</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_asin.vcxproj">
+      <Project>{565B2C88-DC3D-3AD0-A5BB-345241C158F0}</Project>
+      <Name>compile_Cwise_asin</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_atan.vcxproj">
+      <Project>{7E95A8C9-A1BC-3F16-81DA-960593B4741D}</Project>
+      <Name>compile_Cwise_atan</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_boolean_and.vcxproj">
+      <Project>{7A8FF6D6-8467-39E1-80EF-9F5C56DFC8A0}</Project>
+      <Name>compile_Cwise_boolean_and</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_boolean_not.vcxproj">
+      <Project>{0FA41421-0851-3AB3-A96D-0FBDDDE0E1A0}</Project>
+      <Name>compile_Cwise_boolean_not</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_boolean_or.vcxproj">
+      <Project>{222500F2-6230-3C91-AFBB-6B009E327DB6}</Project>
+      <Name>compile_Cwise_boolean_or</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_boolean_xor.vcxproj">
+      <Project>{A60FAF28-B338-336F-B9A5-09C345A05B83}</Project>
+      <Name>compile_Cwise_boolean_xor</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_ceil.vcxproj">
+      <Project>{6E327202-3051-32DC-8BA1-0BB7D9514CCA}</Project>
+      <Name>compile_Cwise_ceil</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_cos.vcxproj">
+      <Project>{802B35CE-3471-384E-8858-28380BF28738}</Project>
+      <Name>compile_Cwise_cos</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_cosh.vcxproj">
+      <Project>{6730A3BB-C3EA-313B-811F-D59D09CA2894}</Project>
+      <Name>compile_Cwise_cosh</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_cube.vcxproj">
+      <Project>{9B35291E-28D1-31CB-925B-AFBB12D8EFFE}</Project>
+      <Name>compile_Cwise_cube</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_equal_equal.vcxproj">
+      <Project>{4E3F9A43-477B-36C4-845F-7E5C253C0AB4}</Project>
+      <Name>compile_Cwise_equal_equal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_exp.vcxproj">
+      <Project>{B596C0E0-86B2-3099-B08C-8EB202272F78}</Project>
+      <Name>compile_Cwise_exp</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_floor.vcxproj">
+      <Project>{3ED36352-0896-3BFA-B044-BA43C278A031}</Project>
+      <Name>compile_Cwise_floor</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_greater.vcxproj">
+      <Project>{763AA509-0F8F-3181-9F6E-0A2AA38B2494}</Project>
+      <Name>compile_Cwise_greater</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_greater_equal.vcxproj">
+      <Project>{A10CA80F-E735-31D4-8CBE-1C87032C15A7}</Project>
+      <Name>compile_Cwise_greater_equal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_inverse.vcxproj">
+      <Project>{E5CC084D-E412-3DD2-A451-6E95F1555F41}</Project>
+      <Name>compile_Cwise_inverse</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_isFinite.vcxproj">
+      <Project>{3862D783-892B-3A9E-ADC8-1E4ED44F2429}</Project>
+      <Name>compile_Cwise_isFinite</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_isInf.vcxproj">
+      <Project>{60E8C7EC-67D6-3537-AD26-EC35ABC05953}</Project>
+      <Name>compile_Cwise_isInf</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_isNaN.vcxproj">
+      <Project>{64F066E4-FBE2-30EA-829A-0831D3171FE8}</Project>
+      <Name>compile_Cwise_isNaN</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_less.vcxproj">
+      <Project>{81F38214-DFC2-3A8C-B3F8-19A5ABC0B98E}</Project>
+      <Name>compile_Cwise_less</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_less_equal.vcxproj">
+      <Project>{1C69DD81-12F5-352D-B46E-55AB6D0C4AF2}</Project>
+      <Name>compile_Cwise_less_equal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_log.vcxproj">
+      <Project>{BAEE28E1-52BC-3A84-909F-BFE8C16F7724}</Project>
+      <Name>compile_Cwise_log</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_log10.vcxproj">
+      <Project>{8E5F26CE-5914-3269-92CA-B1D68DCBE4B6}</Project>
+      <Name>compile_Cwise_log10</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_max.vcxproj">
+      <Project>{8EF71710-18AA-3897-AF74-69F92C5BC0AF}</Project>
+      <Name>compile_Cwise_max</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_min.vcxproj">
+      <Project>{F63EE47F-7086-31C5-989B-BB2A13CB682D}</Project>
+      <Name>compile_Cwise_min</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_minus.vcxproj">
+      <Project>{AF5FEC5E-3F8D-3596-8F4F-63CAD385E0F9}</Project>
+      <Name>compile_Cwise_minus</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_minus_equal.vcxproj">
+      <Project>{DE33385D-B0AF-3BD9-9A28-F3583A537848}</Project>
+      <Name>compile_Cwise_minus_equal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_not_equal.vcxproj">
+      <Project>{BC1A1CD7-4BF2-3144-86CC-7729018483F4}</Project>
+      <Name>compile_Cwise_not_equal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_plus.vcxproj">
+      <Project>{64629077-C8C5-31DE-8A32-7A082699FF80}</Project>
+      <Name>compile_Cwise_plus</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_plus_equal.vcxproj">
+      <Project>{16A5D8B8-19CB-31EE-9E0D-760D5CF8889B}</Project>
+      <Name>compile_Cwise_plus_equal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_pow.vcxproj">
+      <Project>{A5982A0E-D882-3F3F-AFEC-AEA4B8C83D3B}</Project>
+      <Name>compile_Cwise_pow</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_product.vcxproj">
+      <Project>{440797AB-C911-3AF3-894B-C29B70374B0F}</Project>
+      <Name>compile_Cwise_product</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_quotient.vcxproj">
+      <Project>{946D3CD6-A10E-39AD-B09C-E66321CB6FF8}</Project>
+      <Name>compile_Cwise_quotient</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_rint.vcxproj">
+      <Project>{8910EC68-6174-399D-A818-CC7416AD2196}</Project>
+      <Name>compile_Cwise_rint</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_round.vcxproj">
+      <Project>{ECF37BDD-631E-3B62-B1D8-938776D10E6F}</Project>
+      <Name>compile_Cwise_round</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_scalar_power_array.vcxproj">
+      <Project>{689FDFFB-36D8-30E2-B288-DF54C357E737}</Project>
+      <Name>compile_Cwise_scalar_power_array</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_sign.vcxproj">
+      <Project>{5FA53230-6FFA-35A5-962F-6B0C6E332244}</Project>
+      <Name>compile_Cwise_sign</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_sin.vcxproj">
+      <Project>{854F397B-D205-3277-AE0F-1006EA9EB3C7}</Project>
+      <Name>compile_Cwise_sin</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_sinh.vcxproj">
+      <Project>{BA061C20-71A5-326C-A5FD-78B699719960}</Project>
+      <Name>compile_Cwise_sinh</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_slash_equal.vcxproj">
+      <Project>{DED7F5FF-7512-3A96-8F1D-68541C304A3A}</Project>
+      <Name>compile_Cwise_slash_equal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_sqrt.vcxproj">
+      <Project>{DEFC5AAF-9963-3354-A950-25D13BACEF7A}</Project>
+      <Name>compile_Cwise_sqrt</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_square.vcxproj">
+      <Project>{BABB8E94-3820-332E-8130-96589BAC1AAE}</Project>
+      <Name>compile_Cwise_square</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_tan.vcxproj">
+      <Project>{2664ADC9-3BA9-3416-AD16-D481E382CEE9}</Project>
+      <Name>compile_Cwise_tan</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_tanh.vcxproj">
+      <Project>{537A0BFC-DBA5-34EB-B68D-A50F3F398C5C}</Project>
+      <Name>compile_Cwise_tanh</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Cwise_times_equal.vcxproj">
+      <Project>{6D72F2BC-9B8A-3C27-8F97-B99B552E4520}</Project>
+      <Name>compile_Cwise_times_equal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_DenseBase_LinSpaced.vcxproj">
+      <Project>{5D6F6392-8950-327F-BD8C-3663A6712A6F}</Project>
+      <Name>compile_DenseBase_LinSpaced</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_DenseBase_LinSpacedInt.vcxproj">
+      <Project>{5E2AB7AB-EA74-3E4C-99F4-AE9E203EF7ED}</Project>
+      <Name>compile_DenseBase_LinSpacedInt</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_DenseBase_LinSpaced_seq_deprecated.vcxproj">
+      <Project>{EB089E3D-D1D0-3385-A70C-ECDFC25211B5}</Project>
+      <Name>compile_DenseBase_LinSpaced_seq_deprecated</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_DenseBase_setLinSpaced.vcxproj">
+      <Project>{08BBDCC8-55D9-307A-B42E-DFEF54037ED1}</Project>
+      <Name>compile_DenseBase_setLinSpaced</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_DirectionWise_hnormalized.vcxproj">
+      <Project>{311AA0CF-B076-396C-90B5-99D9019F04B5}</Project>
+      <Name>compile_DirectionWise_hnormalized</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_DirectionWise_replicate.vcxproj">
+      <Project>{DE7CA476-4080-3B68-B248-68E399B5E921}</Project>
+      <Name>compile_DirectionWise_replicate</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_DirectionWise_replicate_int.vcxproj">
+      <Project>{133DF057-431C-3657-AEC6-FB652EC2DC5C}</Project>
+      <Name>compile_DirectionWise_replicate_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_EigenSolver_EigenSolver_MatrixType.vcxproj">
+      <Project>{64ECFE11-65AA-32D2-A1A8-61E256991E07}</Project>
+      <Name>compile_EigenSolver_EigenSolver_MatrixType</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_EigenSolver_compute.vcxproj">
+      <Project>{212B71CE-38E6-3025-9C7C-1A918933D20D}</Project>
+      <Name>compile_EigenSolver_compute</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_EigenSolver_eigenvalues.vcxproj">
+      <Project>{40E4365A-439D-30C8-9EA8-37D443681F0E}</Project>
+      <Name>compile_EigenSolver_eigenvalues</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_EigenSolver_eigenvectors.vcxproj">
+      <Project>{B750F703-12EA-3FCE-A87B-E3508B262AF3}</Project>
+      <Name>compile_EigenSolver_eigenvectors</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_EigenSolver_pseudoEigenvectors.vcxproj">
+      <Project>{E5CDC7C2-B9B5-3895-9862-CF934F1CE58F}</Project>
+      <Name>compile_EigenSolver_pseudoEigenvectors</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_FullPivHouseholderQR_solve.vcxproj">
+      <Project>{07E512E4-B165-3799-9FC3-6848192173AF}</Project>
+      <Name>compile_FullPivHouseholderQR_solve</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_FullPivLU_image.vcxproj">
+      <Project>{66A659C8-2374-3435-B849-0D9424F98A27}</Project>
+      <Name>compile_FullPivLU_image</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_FullPivLU_kernel.vcxproj">
+      <Project>{5B0D9354-0C64-3052-BAD5-92CAFA75168C}</Project>
+      <Name>compile_FullPivLU_kernel</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_FullPivLU_solve.vcxproj">
+      <Project>{D0F62B6B-FCA8-3388-9D66-095A0BA27013}</Project>
+      <Name>compile_FullPivLU_solve</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_GeneralizedEigenSolver.vcxproj">
+      <Project>{F8845E7E-7460-303B-8F8F-B08B5A4AD09E}</Project>
+      <Name>compile_GeneralizedEigenSolver</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_HessenbergDecomposition_compute.vcxproj">
+      <Project>{78139D8E-E620-3C1B-A09F-AC23E83BBF94}</Project>
+      <Name>compile_HessenbergDecomposition_compute</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_HessenbergDecomposition_matrixH.vcxproj">
+      <Project>{ECB8A3EA-508B-36D9-83BB-8A35B48822DC}</Project>
+      <Name>compile_HessenbergDecomposition_matrixH</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_HessenbergDecomposition_packedMatrix.vcxproj">
+      <Project>{7393A18C-2301-37C8-94AB-7120A8CE8014}</Project>
+      <Name>compile_HessenbergDecomposition_packedMatrix</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_HouseholderQR_householderQ.vcxproj">
+      <Project>{D3749507-6035-30CB-93E5-80CF64091430}</Project>
+      <Name>compile_HouseholderQR_householderQ</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_HouseholderQR_solve.vcxproj">
+      <Project>{1705AB7F-1CD6-3AFC-8EE7-EF559A0F4002}</Project>
+      <Name>compile_HouseholderQR_solve</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_HouseholderSequence_HouseholderSequence.vcxproj">
+      <Project>{BFF83923-2C73-39E4-848F-4D852DF268A3}</Project>
+      <Name>compile_HouseholderSequence_HouseholderSequence</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_IOFormat.vcxproj">
+      <Project>{ED908D91-6420-3298-8A70-03747F3212AC}</Project>
+      <Name>compile_IOFormat</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_JacobiSVD_basic.vcxproj">
+      <Project>{7AB4A0EC-FFEE-326E-A3BB-9DF1C015DADA}</Project>
+      <Name>compile_JacobiSVD_basic</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Jacobi_makeGivens.vcxproj">
+      <Project>{8ABEC9D4-DA6D-3799-A895-184443169AC0}</Project>
+      <Name>compile_Jacobi_makeGivens</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Jacobi_makeJacobi.vcxproj">
+      <Project>{94F4740D-7176-35FD-9284-D41E278A147F}</Project>
+      <Name>compile_Jacobi_makeJacobi</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_LLT_example.vcxproj">
+      <Project>{F00114B8-F662-3A0B-9FA5-0391A4A07CDD}</Project>
+      <Name>compile_LLT_example</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_LLT_solve.vcxproj">
+      <Project>{BE48F3B9-9124-3BF6-98CF-1E465FA40DEF}</Project>
+      <Name>compile_LLT_solve</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_LeastSquaresNormalEquations.vcxproj">
+      <Project>{E380AA43-1374-35CE-AD24-884896BCF69F}</Project>
+      <Name>compile_LeastSquaresNormalEquations</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_LeastSquaresQR.vcxproj">
+      <Project>{6D7214C1-CC20-35D3-AACD-7C6E300A2928}</Project>
+      <Name>compile_LeastSquaresQR</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Map_general_stride.vcxproj">
+      <Project>{6150DB30-EA54-30D4-84BB-6E8267495F02}</Project>
+      <Name>compile_Map_general_stride</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Map_inner_stride.vcxproj">
+      <Project>{6488205D-99B1-31A6-9872-DC3E087ACD24}</Project>
+      <Name>compile_Map_inner_stride</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Map_outer_stride.vcxproj">
+      <Project>{207A8638-D69E-3D67-9258-6B59C3463CE3}</Project>
+      <Name>compile_Map_outer_stride</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Map_placement_new.vcxproj">
+      <Project>{AA3C8981-0BBB-3124-99CE-A16916E14D29}</Project>
+      <Name>compile_Map_placement_new</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Map_simple.vcxproj">
+      <Project>{616B24AD-7878-32E6-817A-BB2FB5CFB433}</Project>
+      <Name>compile_Map_simple</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_adjoint.vcxproj">
+      <Project>{C99A3AD5-5199-3DE4-8814-C7F51584C21A}</Project>
+      <Name>compile_MatrixBase_adjoint</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_all.vcxproj">
+      <Project>{39C5BB3D-4733-3344-86F4-9AE10AF29C17}</Project>
+      <Name>compile_MatrixBase_all</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_applyOnTheLeft.vcxproj">
+      <Project>{16BC1978-BB64-34E4-BD10-CB90C737F131}</Project>
+      <Name>compile_MatrixBase_applyOnTheLeft</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_applyOnTheRight.vcxproj">
+      <Project>{1F512187-158C-35CE-89B2-BE2B8B0B75A4}</Project>
+      <Name>compile_MatrixBase_applyOnTheRight</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_array.vcxproj">
+      <Project>{9B4CBCD4-8600-3F61-B3AD-BF179E13635E}</Project>
+      <Name>compile_MatrixBase_array</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_array_const.vcxproj">
+      <Project>{F3A36FC0-CAD6-3A9F-A7C2-1D770D744F07}</Project>
+      <Name>compile_MatrixBase_array_const</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_asDiagonal.vcxproj">
+      <Project>{F04B0AE1-BB9A-30DD-8E79-C696566706ED}</Project>
+      <Name>compile_MatrixBase_asDiagonal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_block_int_int.vcxproj">
+      <Project>{E4F78A54-F236-3BAD-B5E8-0DA65CD82F81}</Project>
+      <Name>compile_MatrixBase_block_int_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_block_int_int_int_int.vcxproj">
+      <Project>{DA515C55-84C5-307F-814C-F967EE4383C2}</Project>
+      <Name>compile_MatrixBase_block_int_int_int_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_bottomLeftCorner_int_int.vcxproj">
+      <Project>{F66F3A8D-F51D-3A3C-B73D-E7FD38136713}</Project>
+      <Name>compile_MatrixBase_bottomLeftCorner_int_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_bottomRightCorner_int_int.vcxproj">
+      <Project>{5600201D-6EEF-3BCE-BEE5-C1BA03CF4C37}</Project>
+      <Name>compile_MatrixBase_bottomRightCorner_int_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_bottomRows_int.vcxproj">
+      <Project>{4D32AA5E-E1F2-3EDA-910F-A3E058FF0983}</Project>
+      <Name>compile_MatrixBase_bottomRows_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_cast.vcxproj">
+      <Project>{1123CD83-138C-31B3-BB3D-3415AB52FBE0}</Project>
+      <Name>compile_MatrixBase_cast</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_col.vcxproj">
+      <Project>{1577AAC4-B94E-3CF5-B9F2-FF20C4EE4283}</Project>
+      <Name>compile_MatrixBase_col</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_colwise.vcxproj">
+      <Project>{2DFB6ED3-B893-386E-8129-71E5F7B020ED}</Project>
+      <Name>compile_MatrixBase_colwise</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_computeInverseAndDetWithCheck.vcxproj">
+      <Project>{9F14924B-6247-36C9-A0F3-F497D5CA8FB9}</Project>
+      <Name>compile_MatrixBase_computeInverseAndDetWithCheck</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_computeInverseWithCheck.vcxproj">
+      <Project>{4A936749-07E1-36F2-81BC-F971803029B7}</Project>
+      <Name>compile_MatrixBase_computeInverseWithCheck</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_cwiseAbs.vcxproj">
+      <Project>{1306827E-D80F-31E5-94EF-9EB8A9EBBCA5}</Project>
+      <Name>compile_MatrixBase_cwiseAbs</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_cwiseAbs2.vcxproj">
+      <Project>{E224AAB1-4B65-3471-B329-F8BA95D4E57B}</Project>
+      <Name>compile_MatrixBase_cwiseAbs2</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_cwiseArg.vcxproj">
+      <Project>{04237656-1538-3E9D-9349-EF8BA314E974}</Project>
+      <Name>compile_MatrixBase_cwiseArg</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_cwiseEqual.vcxproj">
+      <Project>{F3951A9D-AC15-3A04-8B65-F62DAB2B147C}</Project>
+      <Name>compile_MatrixBase_cwiseEqual</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_cwiseInverse.vcxproj">
+      <Project>{5E2D9534-269B-3E7B-9B5D-E845F16F5D83}</Project>
+      <Name>compile_MatrixBase_cwiseInverse</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_cwiseMax.vcxproj">
+      <Project>{BF8F5E4F-264B-352F-9CED-F4DA3E5BB5E9}</Project>
+      <Name>compile_MatrixBase_cwiseMax</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_cwiseMin.vcxproj">
+      <Project>{5138B6E3-5AE8-312D-970E-88E2AF12480A}</Project>
+      <Name>compile_MatrixBase_cwiseMin</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_cwiseNotEqual.vcxproj">
+      <Project>{B3AC111C-865E-3176-B34A-BC864D6BA35C}</Project>
+      <Name>compile_MatrixBase_cwiseNotEqual</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_cwiseProduct.vcxproj">
+      <Project>{3A29DBD3-FD37-3434-9D8D-FCC3E96A0DF5}</Project>
+      <Name>compile_MatrixBase_cwiseProduct</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_cwiseQuotient.vcxproj">
+      <Project>{5C491D92-E392-34EA-AE41-F166A8554C0A}</Project>
+      <Name>compile_MatrixBase_cwiseQuotient</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_cwiseSign.vcxproj">
+      <Project>{D17B061D-0D56-3939-AEFA-F35CDE080951}</Project>
+      <Name>compile_MatrixBase_cwiseSign</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_cwiseSqrt.vcxproj">
+      <Project>{65CDABBF-5837-32D0-B8BE-66273C5C6670}</Project>
+      <Name>compile_MatrixBase_cwiseSqrt</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_diagonal.vcxproj">
+      <Project>{0EC8FC58-1EDB-3BDF-B548-6A9A8FA54789}</Project>
+      <Name>compile_MatrixBase_diagonal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_diagonal_int.vcxproj">
+      <Project>{817423D4-513A-3A35-9895-D8A321618AE6}</Project>
+      <Name>compile_MatrixBase_diagonal_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_diagonal_template_int.vcxproj">
+      <Project>{41D462F6-8F6C-3767-87C6-7755271D385D}</Project>
+      <Name>compile_MatrixBase_diagonal_template_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_eigenvalues.vcxproj">
+      <Project>{0C65081A-D815-3BEA-972C-2B1075FA1C4D}</Project>
+      <Name>compile_MatrixBase_eigenvalues</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_end_int.vcxproj">
+      <Project>{4CFC0FF4-7070-3480-B5DC-CF643370A4C7}</Project>
+      <Name>compile_MatrixBase_end_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_eval.vcxproj">
+      <Project>{19DCB4FD-F2E9-3E13-89F1-2565E035F46A}</Project>
+      <Name>compile_MatrixBase_eval</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_fixedBlock_int_int.vcxproj">
+      <Project>{3E42208D-2C6F-3634-9784-E14E0A058BFB}</Project>
+      <Name>compile_MatrixBase_fixedBlock_int_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_hnormalized.vcxproj">
+      <Project>{FD2F85B0-BC78-3D0A-BC37-FD01CA149B10}</Project>
+      <Name>compile_MatrixBase_hnormalized</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_homogeneous.vcxproj">
+      <Project>{F2B0E86A-0236-3CC1-84B3-988B0BB98443}</Project>
+      <Name>compile_MatrixBase_homogeneous</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_identity.vcxproj">
+      <Project>{540037D5-7898-358D-A119-5921CC76D97E}</Project>
+      <Name>compile_MatrixBase_identity</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_identity_int_int.vcxproj">
+      <Project>{741B2431-09E0-3994-B704-5FB8AD80DCD0}</Project>
+      <Name>compile_MatrixBase_identity_int_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_inverse.vcxproj">
+      <Project>{2B93EAB6-0A60-324E-B266-309ED56601E5}</Project>
+      <Name>compile_MatrixBase_inverse</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_isDiagonal.vcxproj">
+      <Project>{EEA7EF5D-9501-38B3-B3EF-7802423E5BAF}</Project>
+      <Name>compile_MatrixBase_isDiagonal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_isIdentity.vcxproj">
+      <Project>{3B6FDB56-8D19-3AE8-A982-8DB6A2C79684}</Project>
+      <Name>compile_MatrixBase_isIdentity</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_isOnes.vcxproj">
+      <Project>{0DD70D18-9D5E-3132-B2BB-F59406177CF9}</Project>
+      <Name>compile_MatrixBase_isOnes</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_isOrthogonal.vcxproj">
+      <Project>{44E4A3A8-826B-3A02-9200-8332A08CEB5C}</Project>
+      <Name>compile_MatrixBase_isOrthogonal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_isUnitary.vcxproj">
+      <Project>{42839391-E7F3-3A1E-B5EA-AEEA19B6B1F4}</Project>
+      <Name>compile_MatrixBase_isUnitary</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_isZero.vcxproj">
+      <Project>{B7A3F13B-D5EE-3405-A793-AFDF31F580FE}</Project>
+      <Name>compile_MatrixBase_isZero</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_leftCols_int.vcxproj">
+      <Project>{9BC5E825-262A-3235-A547-FE59B83A5317}</Project>
+      <Name>compile_MatrixBase_leftCols_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_noalias.vcxproj">
+      <Project>{06FE35C7-B868-3CCD-9161-B7E116267E62}</Project>
+      <Name>compile_MatrixBase_noalias</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_ones.vcxproj">
+      <Project>{76303242-2620-380A-B88E-619943FFB739}</Project>
+      <Name>compile_MatrixBase_ones</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_ones_int.vcxproj">
+      <Project>{E1BC332B-E8E4-3491-9A4C-E7BC14DFC261}</Project>
+      <Name>compile_MatrixBase_ones_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_ones_int_int.vcxproj">
+      <Project>{C1C9AA59-4CA3-3BF6-9CAF-C72547A09AC4}</Project>
+      <Name>compile_MatrixBase_ones_int_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_operatorNorm.vcxproj">
+      <Project>{38F07BA9-D8A2-3558-8741-1927AD0D1800}</Project>
+      <Name>compile_MatrixBase_operatorNorm</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_prod.vcxproj">
+      <Project>{3385AE69-ECC1-31AA-A089-6446C2A0C3EB}</Project>
+      <Name>compile_MatrixBase_prod</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_random.vcxproj">
+      <Project>{24D1B01D-C578-31D4-BD32-E8E77F824A0A}</Project>
+      <Name>compile_MatrixBase_random</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_random_int.vcxproj">
+      <Project>{1C47C205-0F86-3BC6-9403-7552B8FF06CF}</Project>
+      <Name>compile_MatrixBase_random_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_random_int_int.vcxproj">
+      <Project>{2BD23D51-4BE8-3B85-AE13-A062287CC597}</Project>
+      <Name>compile_MatrixBase_random_int_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_replicate.vcxproj">
+      <Project>{02EEE28B-7F05-391D-BEA0-FFDD2DA8B6A3}</Project>
+      <Name>compile_MatrixBase_replicate</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_replicate_int_int.vcxproj">
+      <Project>{79B60F8A-5404-39C9-AC58-874784D355A3}</Project>
+      <Name>compile_MatrixBase_replicate_int_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_reshaped_auto.vcxproj">
+      <Project>{1750C498-AFC9-3CF8-909D-6415B2254DDF}</Project>
+      <Name>compile_MatrixBase_reshaped_auto</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_reshaped_fixed.vcxproj">
+      <Project>{2B2484E7-5BAB-3AC5-92A2-ACC010B6192E}</Project>
+      <Name>compile_MatrixBase_reshaped_fixed</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_reshaped_int_int.vcxproj">
+      <Project>{19DCD64E-0D3A-37C7-AC55-E0F77D644F5D}</Project>
+      <Name>compile_MatrixBase_reshaped_int_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_reshaped_to_vector.vcxproj">
+      <Project>{C1D1F773-6D0E-3D2E-B285-7C81B09E14C0}</Project>
+      <Name>compile_MatrixBase_reshaped_to_vector</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_reverse.vcxproj">
+      <Project>{2EC5562A-6DB0-33E0-B2AE-818E9919896B}</Project>
+      <Name>compile_MatrixBase_reverse</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_rightCols_int.vcxproj">
+      <Project>{B0760DB6-55F2-30D4-9C7D-C72DD46459E6}</Project>
+      <Name>compile_MatrixBase_rightCols_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_row.vcxproj">
+      <Project>{95684008-DC78-3BA0-A035-0ABB8F0AF7D1}</Project>
+      <Name>compile_MatrixBase_row</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_rowwise.vcxproj">
+      <Project>{4C4548AC-50B9-3366-9BC8-1F4863481AFB}</Project>
+      <Name>compile_MatrixBase_rowwise</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_segment_int_int.vcxproj">
+      <Project>{747EAA08-F9E2-3630-98A5-F58C21FDE569}</Project>
+      <Name>compile_MatrixBase_segment_int_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_select.vcxproj">
+      <Project>{44017B32-C275-346F-995B-C23EE11471C8}</Project>
+      <Name>compile_MatrixBase_select</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_selfadjointView.vcxproj">
+      <Project>{55D56364-1C33-3C3A-BA8B-E5342933ECB8}</Project>
+      <Name>compile_MatrixBase_selfadjointView</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_set.vcxproj">
+      <Project>{1691D4F7-3BC1-35BC-AD87-666529416CA8}</Project>
+      <Name>compile_MatrixBase_set</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_setIdentity.vcxproj">
+      <Project>{708053D8-92D9-399E-844A-810609B82AAC}</Project>
+      <Name>compile_MatrixBase_setIdentity</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_setOnes.vcxproj">
+      <Project>{EB8075DA-59B4-33B1-9213-F7A2F3DA8409}</Project>
+      <Name>compile_MatrixBase_setOnes</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_setRandom.vcxproj">
+      <Project>{BB44937F-6EFC-3F7A-A437-0447D5082F15}</Project>
+      <Name>compile_MatrixBase_setRandom</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_setZero.vcxproj">
+      <Project>{4BA09A9B-09E3-3C62-BC34-7BC48C6C6C86}</Project>
+      <Name>compile_MatrixBase_setZero</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_start_int.vcxproj">
+      <Project>{A8AE9CC4-4B60-38A3-9E1F-25EE4FD89FA9}</Project>
+      <Name>compile_MatrixBase_start_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_template_int_bottomRows.vcxproj">
+      <Project>{20DED4D9-6880-393D-9253-38745CC73B2A}</Project>
+      <Name>compile_MatrixBase_template_int_bottomRows</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_template_int_end.vcxproj">
+      <Project>{058C0601-9788-3CE3-9018-6A7FCE086347}</Project>
+      <Name>compile_MatrixBase_template_int_end</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_template_int_int_block_int_int_int_int.vcxproj">
+      <Project>{C505DBAE-9BE9-35CC-B693-38101E48AA92}</Project>
+      <Name>compile_MatrixBase_template_int_int_block_int_int_int_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_template_int_int_bottomLeftCorner.vcxproj">
+      <Project>{859FAD20-5810-3829-9A4A-04AB28900261}</Project>
+      <Name>compile_MatrixBase_template_int_int_bottomLeftCorner</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_template_int_int_bottomLeftCorner_int_int.vcxproj">
+      <Project>{BE896D03-9B66-3A54-9606-AA13E1CB5CBC}</Project>
+      <Name>compile_MatrixBase_template_int_int_bottomLeftCorner_int_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_template_int_int_bottomRightCorner.vcxproj">
+      <Project>{EBD1EE5C-CBF6-3DEF-97A2-DF66FC5E6D20}</Project>
+      <Name>compile_MatrixBase_template_int_int_bottomRightCorner</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_template_int_int_bottomRightCorner_int_int.vcxproj">
+      <Project>{38382270-F9A7-3983-BB7E-71E3B408ECA2}</Project>
+      <Name>compile_MatrixBase_template_int_int_bottomRightCorner_int_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_template_int_int_topLeftCorner.vcxproj">
+      <Project>{DDF78D91-29D5-3521-8D7D-93DB4C1CED76}</Project>
+      <Name>compile_MatrixBase_template_int_int_topLeftCorner</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_template_int_int_topLeftCorner_int_int.vcxproj">
+      <Project>{996ACA5F-E98E-37B8-8CCE-632CA3FA67D7}</Project>
+      <Name>compile_MatrixBase_template_int_int_topLeftCorner_int_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_template_int_int_topRightCorner.vcxproj">
+      <Project>{E03E51CB-FED5-3A9D-8205-B8B2CDAFFF47}</Project>
+      <Name>compile_MatrixBase_template_int_int_topRightCorner</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_template_int_int_topRightCorner_int_int.vcxproj">
+      <Project>{4108C814-6A3D-3FD6-8D6D-0C6460F304B7}</Project>
+      <Name>compile_MatrixBase_template_int_int_topRightCorner_int_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_template_int_leftCols.vcxproj">
+      <Project>{E09F113F-2753-336A-A8F7-933F7D4303D8}</Project>
+      <Name>compile_MatrixBase_template_int_leftCols</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_template_int_rightCols.vcxproj">
+      <Project>{23449186-9555-3D2D-BF74-83EB52CAC396}</Project>
+      <Name>compile_MatrixBase_template_int_rightCols</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_template_int_segment.vcxproj">
+      <Project>{D1823242-5BF1-3C88-95FB-DFC54264B5AC}</Project>
+      <Name>compile_MatrixBase_template_int_segment</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_template_int_start.vcxproj">
+      <Project>{12FB3DF8-DED9-3D29-9BF0-B05C9295A0DF}</Project>
+      <Name>compile_MatrixBase_template_int_start</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_template_int_topRows.vcxproj">
+      <Project>{1A513D38-F70F-3A31-A898-C3CBDB76C317}</Project>
+      <Name>compile_MatrixBase_template_int_topRows</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_topLeftCorner_int_int.vcxproj">
+      <Project>{1BEB9F42-AC62-344F-AF94-0552EA5D6FBB}</Project>
+      <Name>compile_MatrixBase_topLeftCorner_int_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_topRightCorner_int_int.vcxproj">
+      <Project>{5CC4B5E2-21C1-36C5-A7BC-BB341F301C74}</Project>
+      <Name>compile_MatrixBase_topRightCorner_int_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_topRows_int.vcxproj">
+      <Project>{A225E533-8AA1-3AEB-B775-598AAD4AA2F3}</Project>
+      <Name>compile_MatrixBase_topRows_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_transpose.vcxproj">
+      <Project>{78DE5158-9488-331D-93F7-E3005B701D3F}</Project>
+      <Name>compile_MatrixBase_transpose</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_triangularView.vcxproj">
+      <Project>{43033D5D-B71A-31E3-BAE2-EDA085908C7C}</Project>
+      <Name>compile_MatrixBase_triangularView</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_zero.vcxproj">
+      <Project>{B98CA560-7261-3550-8596-16BCAD30F316}</Project>
+      <Name>compile_MatrixBase_zero</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_zero_int.vcxproj">
+      <Project>{B1C53353-32AC-3217-9369-AE896E25AC5B}</Project>
+      <Name>compile_MatrixBase_zero_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_MatrixBase_zero_int_int.vcxproj">
+      <Project>{1F9169A1-7591-37AB-86CC-21E1084650B1}</Project>
+      <Name>compile_MatrixBase_zero_int_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Matrix_Map_stride.vcxproj">
+      <Project>{D8D97B5D-F923-3BA8-A2F8-923E70427330}</Project>
+      <Name>compile_Matrix_Map_stride</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Matrix_resize_NoChange_int.vcxproj">
+      <Project>{DBE6CCF0-CC16-3F4C-A4D0-A719F70B148B}</Project>
+      <Name>compile_Matrix_resize_NoChange_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Matrix_resize_int.vcxproj">
+      <Project>{B84EDF9F-5257-3CBF-A3D3-CFB1B13D9785}</Project>
+      <Name>compile_Matrix_resize_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Matrix_resize_int_NoChange.vcxproj">
+      <Project>{2F70BE06-755B-3855-8148-DE125475CFA8}</Project>
+      <Name>compile_Matrix_resize_int_NoChange</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Matrix_resize_int_int.vcxproj">
+      <Project>{79E5F73A-6B5C-3EBA-B1FD-A17B304EA19E}</Project>
+      <Name>compile_Matrix_resize_int_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Matrix_setConstant_int.vcxproj">
+      <Project>{D5C98E44-7E22-34CA-A7F3-452ED97B3E26}</Project>
+      <Name>compile_Matrix_setConstant_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Matrix_setConstant_int_int.vcxproj">
+      <Project>{90E78F9D-B4E7-3F29-B37D-7295A142E32A}</Project>
+      <Name>compile_Matrix_setConstant_int_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Matrix_setIdentity_int_int.vcxproj">
+      <Project>{E4B7DC03-2109-3CAF-9074-F52B17E8FFE8}</Project>
+      <Name>compile_Matrix_setIdentity_int_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Matrix_setOnes_int.vcxproj">
+      <Project>{1E193E12-2618-3AC3-BE7C-B2EE154C87F4}</Project>
+      <Name>compile_Matrix_setOnes_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Matrix_setOnes_int_int.vcxproj">
+      <Project>{70BB31D2-99C8-340B-A508-BD5804A47166}</Project>
+      <Name>compile_Matrix_setOnes_int_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Matrix_setRandom_int.vcxproj">
+      <Project>{E887424E-4569-3C6C-9726-12CFE210A90D}</Project>
+      <Name>compile_Matrix_setRandom_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Matrix_setRandom_int_int.vcxproj">
+      <Project>{E458698B-FF3F-3804-828B-A4031C69562A}</Project>
+      <Name>compile_Matrix_setRandom_int_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Matrix_setZero_int.vcxproj">
+      <Project>{9A15D6BC-964E-3B19-B589-18EBED744F2E}</Project>
+      <Name>compile_Matrix_setZero_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Matrix_setZero_int_int.vcxproj">
+      <Project>{7031C4CE-2E0E-3879-9DD6-D2A245ACB460}</Project>
+      <Name>compile_Matrix_setZero_int_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_PartialPivLU_solve.vcxproj">
+      <Project>{9F6514B8-BF68-39F3-8BFC-B12E728333D0}</Project>
+      <Name>compile_PartialPivLU_solve</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_PartialRedux_count.vcxproj">
+      <Project>{0A55D3BE-0248-3926-961F-4BB0F74AC0B4}</Project>
+      <Name>compile_PartialRedux_count</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_PartialRedux_maxCoeff.vcxproj">
+      <Project>{65A56FBD-B054-3632-A313-BAEA309CB65A}</Project>
+      <Name>compile_PartialRedux_maxCoeff</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_PartialRedux_minCoeff.vcxproj">
+      <Project>{2840CDB0-07E3-314D-8812-6BF0DBE4C526}</Project>
+      <Name>compile_PartialRedux_minCoeff</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_PartialRedux_norm.vcxproj">
+      <Project>{EB8EFF93-6A47-3420-BEC1-018921DC4D8E}</Project>
+      <Name>compile_PartialRedux_norm</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_PartialRedux_prod.vcxproj">
+      <Project>{8EC325B4-F558-3B6D-8343-6AEB2379586A}</Project>
+      <Name>compile_PartialRedux_prod</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_PartialRedux_squaredNorm.vcxproj">
+      <Project>{227CB979-6183-3D20-A8F6-D1910C4FA154}</Project>
+      <Name>compile_PartialRedux_squaredNorm</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_PartialRedux_sum.vcxproj">
+      <Project>{34DA5B12-FA68-33D2-B363-66A24B79029C}</Project>
+      <Name>compile_PartialRedux_sum</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_RealQZ_compute.vcxproj">
+      <Project>{B0C6B1DE-0DFC-3D29-BB74-F190E90F9542}</Project>
+      <Name>compile_RealQZ_compute</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_RealSchur_RealSchur_MatrixType.vcxproj">
+      <Project>{1C685A98-80B0-3C29-9E1A-53BF2D63C28D}</Project>
+      <Name>compile_RealSchur_RealSchur_MatrixType</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_RealSchur_compute.vcxproj">
+      <Project>{DE6679C8-3BD8-3140-BED1-024C24B37B56}</Project>
+      <Name>compile_RealSchur_compute</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_SelfAdjointEigenSolver_SelfAdjointEigenSolver.vcxproj">
+      <Project>{3EB6EBD2-482F-31A4-9C4F-759DA74970A6}</Project>
+      <Name>compile_SelfAdjointEigenSolver_SelfAdjointEigenSolver</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_SelfAdjointEigenSolver_SelfAdjointEigenSolver_MatrixType.vcxproj">
+      <Project>{EDA1955A-B53D-3D32-BD91-C01848A61D51}</Project>
+      <Name>compile_SelfAdjointEigenSolver_SelfAdjointEigenSolver_MatrixType</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_SelfAdjointEigenSolver_SelfAdjointEigenSolver_MatrixType2.vcxproj">
+      <Project>{F12E6F1E-8C59-320A-A155-E9DD6AB22663}</Project>
+      <Name>compile_SelfAdjointEigenSolver_SelfAdjointEigenSolver_MatrixType2</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_SelfAdjointEigenSolver_compute_MatrixType.vcxproj">
+      <Project>{2E9AE56C-864A-3854-9294-BCB13BBB7C14}</Project>
+      <Name>compile_SelfAdjointEigenSolver_compute_MatrixType</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_SelfAdjointEigenSolver_compute_MatrixType2.vcxproj">
+      <Project>{D971FD6A-8DED-3AA7-9484-D9FA2D980E20}</Project>
+      <Name>compile_SelfAdjointEigenSolver_compute_MatrixType2</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_SelfAdjointEigenSolver_eigenvalues.vcxproj">
+      <Project>{E9146901-52F7-335C-9665-BBD947BAA967}</Project>
+      <Name>compile_SelfAdjointEigenSolver_eigenvalues</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_SelfAdjointEigenSolver_eigenvectors.vcxproj">
+      <Project>{3777DE24-5D15-3C2B-ACB7-ADF9474EDAC4}</Project>
+      <Name>compile_SelfAdjointEigenSolver_eigenvectors</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_SelfAdjointEigenSolver_operatorInverseSqrt.vcxproj">
+      <Project>{B3182A27-947C-341D-BF18-CE23497158DD}</Project>
+      <Name>compile_SelfAdjointEigenSolver_operatorInverseSqrt</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_SelfAdjointEigenSolver_operatorSqrt.vcxproj">
+      <Project>{3D5EFACC-FFF7-3C46-861D-28DEDB113D10}</Project>
+      <Name>compile_SelfAdjointEigenSolver_operatorSqrt</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_SelfAdjointView_eigenvalues.vcxproj">
+      <Project>{18F11354-D891-3018-8893-FC853BB95E7C}</Project>
+      <Name>compile_SelfAdjointView_eigenvalues</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_SelfAdjointView_operatorNorm.vcxproj">
+      <Project>{702DE273-C7FA-3DA8-9221-4A9CB874F2D2}</Project>
+      <Name>compile_SelfAdjointView_operatorNorm</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Slicing_arrayexpr.vcxproj">
+      <Project>{E998243E-4B6A-366F-8365-870B201742EF}</Project>
+      <Name>compile_Slicing_arrayexpr</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_SparseMatrix_coeffs.vcxproj">
+      <Project>{A37DEAEF-3DAF-35D6-B42F-4CAEC47D90F1}</Project>
+      <Name>compile_SparseMatrix_coeffs</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_TopicAliasing_block.vcxproj">
+      <Project>{AC278CD0-194B-3C7E-B522-19E54EF34844}</Project>
+      <Name>compile_TopicAliasing_block</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_TopicAliasing_block_correct.vcxproj">
+      <Project>{32590937-6640-3674-A7F4-112F1B5552B9}</Project>
+      <Name>compile_TopicAliasing_block_correct</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_TopicAliasing_cwise.vcxproj">
+      <Project>{83F3AC9D-F82E-36FD-9097-5C4C40A75ACC}</Project>
+      <Name>compile_TopicAliasing_cwise</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_TopicAliasing_mult1.vcxproj">
+      <Project>{53830A2B-0A6B-3BCE-9AC3-90BADBC09B7E}</Project>
+      <Name>compile_TopicAliasing_mult1</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_TopicAliasing_mult2.vcxproj">
+      <Project>{CD94EC91-0E71-3E3B-9FB9-8C21F4E949FC}</Project>
+      <Name>compile_TopicAliasing_mult2</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_TopicAliasing_mult3.vcxproj">
+      <Project>{B61890B6-6903-3A9D-8ED4-95ABBD187AA9}</Project>
+      <Name>compile_TopicAliasing_mult3</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_TopicAliasing_mult4.vcxproj">
+      <Project>{7C069E14-D4A6-3C5C-A54A-0F664BA3BBF6}</Project>
+      <Name>compile_TopicAliasing_mult4</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_TopicAliasing_mult5.vcxproj">
+      <Project>{E2BFBE0C-57B8-3F11-9588-0340389AC34A}</Project>
+      <Name>compile_TopicAliasing_mult5</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_TopicStorageOrders_example.vcxproj">
+      <Project>{034ABBCF-B14D-3DB0-ABF7-D84FE57B339C}</Project>
+      <Name>compile_TopicStorageOrders_example</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Triangular_solve.vcxproj">
+      <Project>{78F6E2B7-3629-3412-A2FD-2EE6345E56C3}</Project>
+      <Name>compile_Triangular_solve</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tridiagonalization_Tridiagonalization_MatrixType.vcxproj">
+      <Project>{7BC8DB6B-E56B-3B20-935D-FD6CA042EDD9}</Project>
+      <Name>compile_Tridiagonalization_Tridiagonalization_MatrixType</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tridiagonalization_compute.vcxproj">
+      <Project>{1E2775FF-E980-39E2-8D1E-494F715B6544}</Project>
+      <Name>compile_Tridiagonalization_compute</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tridiagonalization_decomposeInPlace.vcxproj">
+      <Project>{3B8443C2-C2B7-3801-A43A-72BD3C2BA958}</Project>
+      <Name>compile_Tridiagonalization_decomposeInPlace</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tridiagonalization_diagonal.vcxproj">
+      <Project>{FE1EB04E-260A-35B2-990A-0B8062A50E19}</Project>
+      <Name>compile_Tridiagonalization_diagonal</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tridiagonalization_householderCoefficients.vcxproj">
+      <Project>{5D6228C8-5032-3B33-ABAD-56466E356DCA}</Project>
+      <Name>compile_Tridiagonalization_householderCoefficients</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tridiagonalization_packedMatrix.vcxproj">
+      <Project>{3C6B623B-BF7E-3871-9C1F-87DD5D013179}</Project>
+      <Name>compile_Tridiagonalization_packedMatrix</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tutorial_AdvancedInitialization_Block.vcxproj">
+      <Project>{79C90367-3D6F-3281-AAD3-93B4E45E366E}</Project>
+      <Name>compile_Tutorial_AdvancedInitialization_Block</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tutorial_AdvancedInitialization_CommaTemporary.vcxproj">
+      <Project>{C8C39CB7-B57B-3532-9B8D-06AD21A56681}</Project>
+      <Name>compile_Tutorial_AdvancedInitialization_CommaTemporary</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tutorial_AdvancedInitialization_Join.vcxproj">
+      <Project>{297DE149-C53C-3017-BF1D-51B2E84204E5}</Project>
+      <Name>compile_Tutorial_AdvancedInitialization_Join</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tutorial_AdvancedInitialization_LinSpaced.vcxproj">
+      <Project>{E26A0B1E-2AA7-3A9D-B221-301D54AFA066}</Project>
+      <Name>compile_Tutorial_AdvancedInitialization_LinSpaced</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tutorial_AdvancedInitialization_ThreeWays.vcxproj">
+      <Project>{D7F7A350-5E1D-3D66-95AB-7FC32635462A}</Project>
+      <Name>compile_Tutorial_AdvancedInitialization_ThreeWays</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tutorial_AdvancedInitialization_Zero.vcxproj">
+      <Project>{E41F31BC-261A-3F60-AA97-F028090476F5}</Project>
+      <Name>compile_Tutorial_AdvancedInitialization_Zero</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tutorial_Map_rowmajor.vcxproj">
+      <Project>{56411134-1A43-307B-927B-324072F5210F}</Project>
+      <Name>compile_Tutorial_Map_rowmajor</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tutorial_Map_using.vcxproj">
+      <Project>{FB6000A2-F081-3B23-B80F-FC6034474930}</Project>
+      <Name>compile_Tutorial_Map_using</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tutorial_ReshapeMat2Mat.vcxproj">
+      <Project>{13E628D2-05D7-37A1-9516-736A0A88F0B4}</Project>
+      <Name>compile_Tutorial_ReshapeMat2Mat</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tutorial_ReshapeMat2Vec.vcxproj">
+      <Project>{BD89DF93-7759-3721-8761-F13D55241BA7}</Project>
+      <Name>compile_Tutorial_ReshapeMat2Vec</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tutorial_SlicingCol.vcxproj">
+      <Project>{AB48DFC9-B7EE-3701-BB01-1A08CFD162A3}</Project>
+      <Name>compile_Tutorial_SlicingCol</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tutorial_SlicingVec.vcxproj">
+      <Project>{B1D8E42B-47A2-3A58-A76D-4B48C58321DD}</Project>
+      <Name>compile_Tutorial_SlicingVec</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tutorial_commainit_01.vcxproj">
+      <Project>{73840A95-297F-3B61-80FD-27A83DD5AC80}</Project>
+      <Name>compile_Tutorial_commainit_01</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tutorial_commainit_01b.vcxproj">
+      <Project>{164DFBED-9967-34CA-B556-B864EAC874A1}</Project>
+      <Name>compile_Tutorial_commainit_01b</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tutorial_commainit_02.vcxproj">
+      <Project>{7A08E8B7-92F5-35DC-8E4C-A76E44C3BF9D}</Project>
+      <Name>compile_Tutorial_commainit_02</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tutorial_reshaped_vs_resize_1.vcxproj">
+      <Project>{6DF9E19C-A00A-39B9-B7F5-D529359043D3}</Project>
+      <Name>compile_Tutorial_reshaped_vs_resize_1</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tutorial_reshaped_vs_resize_2.vcxproj">
+      <Project>{3A0C2EDE-96B2-3191-BAA8-2BE21B9D615B}</Project>
+      <Name>compile_Tutorial_reshaped_vs_resize_2</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tutorial_solve_matrix_inverse.vcxproj">
+      <Project>{D8E203F8-5BEE-3361-9D9C-71A5E9DA14B9}</Project>
+      <Name>compile_Tutorial_solve_matrix_inverse</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tutorial_solve_multiple_rhs.vcxproj">
+      <Project>{33D3C4DB-4146-3563-93D6-7D640F7FB953}</Project>
+      <Name>compile_Tutorial_solve_multiple_rhs</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tutorial_solve_reuse_decomposition.vcxproj">
+      <Project>{B11B3A87-9EA5-3ADE-8CD5-BC5E9BF13650}</Project>
+      <Name>compile_Tutorial_solve_reuse_decomposition</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tutorial_solve_singular.vcxproj">
+      <Project>{08A0A975-7DC3-316F-9C89-07E9DDE1FC15}</Project>
+      <Name>compile_Tutorial_solve_singular</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tutorial_solve_triangular.vcxproj">
+      <Project>{190E2D01-EEA5-3A7C-95E5-F364BFDC9026}</Project>
+      <Name>compile_Tutorial_solve_triangular</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tutorial_solve_triangular_inplace.vcxproj">
+      <Project>{F2368635-6EDB-31DF-A9CA-EFD6DDAD68BD}</Project>
+      <Name>compile_Tutorial_solve_triangular_inplace</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Tutorial_std_sort.vcxproj">
+      <Project>{DA8B8688-D20F-3E58-8369-C51F41C22D3F}</Project>
+      <Name>compile_Tutorial_std_sort</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_VectorwiseOp_homogeneous.vcxproj">
+      <Project>{E77704D6-3A61-3F85-A81A-02924C254648}</Project>
+      <Name>compile_VectorwiseOp_homogeneous</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_Vectorwise_reverse.vcxproj">
+      <Project>{F7A43E3B-0412-3469-986C-EE59F3FA83C0}</Project>
+      <Name>compile_Vectorwise_reverse</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_class_FullPivLU.vcxproj">
+      <Project>{AC712CFB-AA33-30F3-92EA-092D9E390A52}</Project>
+      <Name>compile_class_FullPivLU</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_tut_arithmetic_redux_minmax.vcxproj">
+      <Project>{BE283D8D-FBB4-31A8-ACED-71D89426BF58}</Project>
+      <Name>compile_tut_arithmetic_redux_minmax</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_tut_arithmetic_transpose_aliasing.vcxproj">
+      <Project>{01904904-E28B-3D1E-85BE-67891BA5205D}</Project>
+      <Name>compile_tut_arithmetic_transpose_aliasing</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_tut_arithmetic_transpose_conjugate.vcxproj">
+      <Project>{78BA201F-C03A-3E83-9092-3CAB4AB1065D}</Project>
+      <Name>compile_tut_arithmetic_transpose_conjugate</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_tut_arithmetic_transpose_inplace.vcxproj">
+      <Project>{309185EE-1ED6-3F89-9F06-347ECCD7E221}</Project>
+      <Name>compile_tut_arithmetic_transpose_inplace</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\snippets\compile_tut_matrix_assignment_resizing.vcxproj">
+      <Project>{AD0BCD7D-9503-36B0-854C-D53E53F8EBC6}</Project>
+      <Name>compile_tut_matrix_assignment_resizing</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\doc.vcxproj">
+      <Project>{C914AC19-326B-3EBB-B6DC-D842C0F8F914}</Project>
+      <Name>doc</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\doc-eigen-prerequisites.vcxproj">
+      <Project>{D7713398-A440-3C6A-B8C3-B3D90C578244}</Project>
+      <Name>doc-eigen-prerequisites</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\doc-unsupported-prerequisites.vcxproj">
+      <Project>{D8A357EC-F609-3A18-8ABA-6F70C7FCDBC8}</Project>
+      <Name>doc-unsupported-prerequisites</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\function_taking_eigenbase.vcxproj">
+      <Project>{74A7A9CA-9565-37CE-AD5B-252E8CAC7833}</Project>
+      <Name>function_taking_eigenbase</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\function_taking_ref.vcxproj">
+      <Project>{8F48A534-FACA-318B-BF60-1A7D2C1F4F7D}</Project>
+      <Name>function_taking_ref</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\make_circulant.vcxproj">
+      <Project>{77DCAF41-C3A7-326F-B19A-80F29F7C12F5}</Project>
+      <Name>make_circulant</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\make_circulant2.vcxproj">
+      <Project>{C39DCCEE-F6BE-3C92-A296-30964AA664EF}</Project>
+      <Name>make_circulant2</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\matrixfree_cg.vcxproj">
+      <Project>{18ECC772-1703-3B4E-93D8-A806584BE9BE}</Project>
+      <Name>matrixfree_cg</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\nullary_indexing.vcxproj">
+      <Project>{43BB22D5-9227-30CF-BDC8-C93621C60BF0}</Project>
+      <Name>nullary_indexing</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\tut_arithmetic_add_sub.vcxproj">
+      <Project>{3C4253D4-C888-30BF-A806-5AF108BBA7C5}</Project>
+      <Name>tut_arithmetic_add_sub</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\tut_arithmetic_dot_cross.vcxproj">
+      <Project>{6A1ADF31-9B83-39F9-9AF7-0B67978B8274}</Project>
+      <Name>tut_arithmetic_dot_cross</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\tut_arithmetic_matrix_mul.vcxproj">
+      <Project>{15E6936A-331D-3167-BF1A-53505756939F}</Project>
+      <Name>tut_arithmetic_matrix_mul</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\tut_arithmetic_redux_basic.vcxproj">
+      <Project>{205DFB62-0138-38C0-AAA4-BA0A184DFE71}</Project>
+      <Name>tut_arithmetic_redux_basic</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\tut_arithmetic_scalar_mul_div.vcxproj">
+      <Project>{F3258DF8-1F06-3908-BA06-254004AEDD47}</Project>
+      <Name>tut_arithmetic_scalar_mul_div</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\tut_matrix_coefficient_accessors.vcxproj">
+      <Project>{209B9AB8-9F78-35CE-B5A9-D3F1E886927B}</Project>
+      <Name>tut_matrix_coefficient_accessors</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\tut_matrix_resize.vcxproj">
+      <Project>{C586185F-866D-3F34-ADBA-9C379B62315B}</Project>
+      <Name>tut_matrix_resize</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Arch\Documents\SteamVR\Relativty\Relativty\Relativty_Driver\dependancies\eigen3\build-vc\doc\examples\tut_matrix_resize_fixed_size.vcxproj">
+      <Project>{57B95015-0D2D-3287-AF6F-B6BD464CE579}</Project>
+      <Name>tut_matrix_resize_fixed_size</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
