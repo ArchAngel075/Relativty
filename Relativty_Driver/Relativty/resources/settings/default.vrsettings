@@ -122,6 +122,7 @@
       "ZoomHeight" : 0.63,
       "EyeGapOffsetPx" : 0,
       "IsDisplayRealDisplay" : true,
-      "IsDisplayOnDesktop" : true
+      "IsDisplayOnDesktop" : true,
+      "append" : true
    }
 }
