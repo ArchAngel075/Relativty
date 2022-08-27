@@ -25,6 +25,8 @@
 #include <codecvt>
 #include <nlohmann/json.hpp>
 
+#include <Eigen/Geometry>
+
 #include "driverlog.h"
 
 #include "Relativty_CTRLDriver.hpp"
@@ -51,6 +53,32 @@ inline void Normalize(float norma[3], float v[3], float max[3], float min[3], in
 	}
 }
 
+inline Eigen::Vector3f getControllerTrueCenter(Eigen::Vector3f controllerTrackedPosition, float* controllerRotationIn, Eigen::Vector3f forwardAxis, float distance) {
+	using Eigen::Quaternion;
+	using Eigen::Vector3;
+	using Eigen::Matrix3;
+	Eigen::Quaternion<float> q_IMU { controllerRotationIn[0],controllerRotationIn[1], controllerRotationIn[2],controllerRotationIn[3] };
+	Eigen::Vector3f contrllerTrackedPositionVector{ controllerTrackedPosition[1],controllerTrackedPosition[2],controllerTrackedPosition[0] };
+	Eigen::Vector3f forwardAxisVector { forwardAxis[0],forwardAxis[1],forwardAxis[2] };
+	//forwardAxisVector.normalize();
+	Relativty::ServerDriver::Log("CTRL IMU axis angle and distance to blob is (" + std::to_string(forwardAxis[0]) + ", " + std::to_string(forwardAxis[1]) + ", " + std::to_string(forwardAxis[2]) + ") @ " + std::to_string(distance) +"\n");
+
+	Eigen::Vector3f LED_forward_vector = q_IMU * forwardAxisVector;
+	Eigen::Vector3f Assumed_position = contrllerTrackedPositionVector + (distance * LED_forward_vector);
+	//positionInVector3.y() is LR
+	//positionInVector3.z(); is up
+	// positionInVector3.x() is fb
+	//float newX = Assumed_position.y();// //lr
+	//float newY = Assumed_position.z();// //ud
+	//float newZ = Assumed_position.x();// //fb
+
+	float newX = Assumed_position.x();// //lr
+	float newY = Assumed_position.y();// //ud
+	float newZ = Assumed_position.z();// //fb
+	return Eigen::Vector3f(newX, newY, newZ);
+	//return Eigen::Vector3f(0,0,0);
+}
+
 std::wstring stringToWstringCTRL(const std::string& t_str)
 {
 	//setup converter
@@ -73,7 +101,7 @@ void Relativty::CTRLDriver::openCom() {
 		return;
 	serialHandle = CreateFileW(comport.c_str(), GENERIC_READ | GENERIC_WRITE, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	if (serialHandle == INVALID_HANDLE_VALUE) {
-		Relativty::ServerDriver::Log("COM: COM initialization failed. \"" + comportRAW + "\"\n");
+		Relativty::ServerDriver::Log("CTRL COM: COM initialization failed. \"" + comportRAW + "\"\n");
 	}
 	else {
 		Relativty::ServerDriver::Log("COM: COM opened. \n");
@@ -107,42 +135,27 @@ vr::EVRInitError Relativty::CTRLDriver::Activate(uint32_t unObjectId) {
 	this->setProperties();
 	Relativty::ServerDriver::Log("CTRL| properties set\n");
 	if (this->bIsStaticRotation) {
-		Relativty::ServerDriver::Log("CTRL| set to static Rotation mode. no connections will be opened\n");
-	}
-	else if (this->bIsSerialComport) {
-		openCom();
+		Relativty::ServerDriver::Log("CTRL| set to static Rotation mode.\n");
 	}
 	else {
-		int result;
-		result = hid_init(); //Result should be 0.
-		if (result) {
-			Relativty::ServerDriver::Log("USB: HID API initialization failed. \n");
-			return vr::VRInitError_Driver_TrackedDeviceInterfaceUnknown;
-		}
-
-		this->handle = hid_open((unsigned short)m_iVid, (unsigned short)m_iPid, NULL);
-		if (!this->handle) {
-#ifdef DRIVERLOG_H
-			DriverLog("USB: Unable to open CTRL device with pid=%d and vid=%d.\n", m_iPid, m_iVid);
-#else
-			Relativty::ServerDriver::Log("USB: Unable to open CTRL device with pid=" + std::to_string(m_iPid) + " and vid=" + std::to_string(m_iVid) + ".\n");
-#endif
-			return vr::VRInitError_Init_InterfaceNotFound;
-		}
+		Relativty::ServerDriver::Log("CTRL| listening for Rotations mode.\n");
+		this->retrieve_quaternion_isOn = true;
+		this->retrieve_quaternion_thread_worker = std::thread(&Relativty::CTRLDriver::retrieve_device_quaternion_packet_threaded, this);
 	}
-
-	this->retrieve_quaternion_isOn = true;
-	this->retrieve_quaternion_thread_worker = std::thread(&Relativty::CTRLDriver::retrieve_device_quaternion_packet_threaded, this);
-
+	if (bIsTrackingInput) {
+		this->retrieve_input_isOn = true;
+		this->retrieve_input_thread_worker = std::thread(&Relativty::CTRLDriver::retrieve_client_input_packet_threaded, this);
+	}
 	if (this->start_tracking_server) {
 		this->retrieve_vector_isOn = true;
 		this->retrieve_vector_thread_worker = std::thread(&Relativty::CTRLDriver::retrieve_client_vector_packet_threaded, this);
-		while (this->serverNotReady) {
-			// do nothing
-		}
+		
 		//this->startPythonTrackingClient_worker = std::thread(startPythonTrackingClient_threaded, this->PyPath);
 	}
-
+	while (this->serverNotReady) {
+		// do nothing
+	}
+	Relativty::ServerDriver::Log("CTRL update_pose_threaded start \n");
 	this->update_pose_thread_worker = std::thread(&Relativty::CTRLDriver::update_pose_threaded, this);
 		
 	return vr::VRInitError_None;
@@ -153,9 +166,6 @@ void Relativty::CTRLDriver::Deactivate() {
 	this->retrieve_quaternion_thread_worker.join();
 	if (this->bIsSerialComport) {
 		CloseHandle(this->serialHandle);
-	} else {
-		hid_close(this->handle);
-		hid_exit();
 	}
 	
 
@@ -171,9 +181,101 @@ void Relativty::CTRLDriver::Deactivate() {
 	Relativty::ServerDriver::Log("CTRL| CTRL| Thread0: all threads exit correctly \n");
 }
 
+
 void Relativty::CTRLDriver::update_pose_threaded() {
 	Relativty::ServerDriver::Log("CTRL| CTRL| Thread2: successfully started\n");
 	while (m_unObjectId != vr::k_unTrackedDeviceIndexInvalid) {
+		//Relativty::ServerDriver::Log("CTRL| CTRL| get vectorials '" + std::to_string(this->new_vector_avaiable) + "\n");
+		vr::VRDriverInput()->UpdateBooleanComponent(HButtons[0], GetAsyncKeyState(0x5A) ? true : false, 0);
+		vr::VRDriverInput()->UpdateBooleanComponent(HButtons[1], GetAsyncKeyState(0x43) ? true : false, 0); // C
+		vr::VRDriverInput()->UpdateBooleanComponent(HButtons[2], GetAsyncKeyState(0x56) ? true : false, 0); //v 
+		vr::VRDriverInput()->UpdateBooleanComponent(HButtons[3], GetAsyncKeyState(0x42) ? true : false, 0); //B
+		//vr::VRDriverInput()->UpdateBooleanComponent(HButtons[4], GetAsyncKeyState(0x42) ? true : false, 0);
+		//vr::VRDriverInput()->UpdateBooleanComponent(HButtons[5], GetAsyncKeyState(0x4E) ? true : false, 0);
+
+		if (this->new_input_avaiable) {
+			//Relativty::ServerDriver::Log("CTRL| ARCH| SOCKET| get buttons\n");
+			//0 is A etc
+			//get real button 0's digital bound index :
+			for (int i = 0; i < 6; i++)
+			{
+				int digitalIndex = this->binding.getButtonIndex(i);
+				if(digitalIndex > -1)
+					vr::VRDriverInput()->UpdateBooleanComponent(HButtons[i], this->input_bool[digitalIndex] == 1, 0);
+			}
+
+			vr::VRDriverInput()->UpdateScalarComponent(HAnalog[2], this->input_bool[0] == 1 ? 1.0f : 0.0f, 0); //Trackpad z
+
+			//vr::VRDriverInput()->UpdateBooleanComponent(HButtons[0], false, 0); //A				/input/application_menu/click
+			//vr::VRDriverInput()->UpdateBooleanComponent(HButtons[1], false, 0); //B			/input/system/click
+			//vr::VRDriverInput()->UpdateBooleanComponent(HButtons[2], false, 0); //trigger		/input/grip/click
+			//vr::VRDriverInput()->UpdateBooleanComponent(HButtons[3], false, 0); //System		/input/trigger/click
+			//vr::VRDriverInput()->UpdateBooleanComponent(HButtons[4], this->input_bool[0] == 1, 0); //Grip			/input/trackpad/click
+			//vr::VRDriverInput()->UpdateBooleanComponent(HButtons[5], this->input_bool[0] == 1, 0); //				/input/trackpad/touch
+
+			
+
+			/*
+			float scalarX = 0;
+			if (bB && !bD) {
+				scalarX = 1;
+			}
+			else if (bD && !bB) {
+				scalarX = -1;
+			}
+
+			float scalarY = 0;
+			if (bA && !bF) {
+				scalarY = 1;
+			}
+			else if (bF && !bA) {
+				scalarY = -1;
+			}
+
+
+			vr::VRDriverInput()->UpdateScalarComponent(HAnalog[0], scalarX, 0); //Trackpad x
+			vr::VRDriverInput()->UpdateScalarComponent(HAnalog[1], scalarY, 0); //Trackpad y
+			*/
+			//vr::VRDriverInput()->UpdateScalarComponent(HAnalog[2], this->binding.getButtonIndex(3) == 1 ? 1 : 0, 0); //Trigger
+			Relativty::ServerDriver::Log("ARCH| CTRL| buttons updated\n");
+			this->new_input_avaiable = false;
+		}
+
+		bool offsetChanged = false;
+		if (GetAsyncKeyState(0x49)) { //I = Y+
+			OY = OY + (1 / 10);
+			offsetChanged = true;
+		}
+		if (GetAsyncKeyState(0x4B)) { //K = Y-
+			OY = OY - (1 / 10);
+			offsetChanged = true;
+		}
+
+		if (GetAsyncKeyState(0x4A)) { //J = X-
+			OX = OX - (1 / 100);
+			offsetChanged = true;
+		}
+		if (GetAsyncKeyState(0x4C)) { //L = X+
+			OX = OX + (1 / 100);
+			offsetChanged = true;
+		}
+
+		//if (GetAsyncKeyState(0x59)) { //Y = Z+
+			//OZ = OZ + (1 / 1000);
+			//offsetChanged = true;
+		//}
+		//if (GetAsyncKeyState(0x48)) { //H = Z-
+			//OZ = OZ - (1 / 1000);
+			//offsetChanged = true;
+		//}
+		if (offsetChanged) {
+			Relativty::ServerDriver::Log("DriverFromHeadTranslation(" + std::to_string(OX)  + " , " + std::to_string(OY) + " , " + std::to_string(OZ) + " )\n");
+			//m_Pose.qDriverFromHeadRotation.x = OX;
+			//m_Pose.qDriverFromHeadRotation.y = OY;
+			//m_Pose.qDriverFromHeadRotation.z = OZ;
+			vr::VRServerDriverHost()->TrackedDevicePoseUpdated(m_unObjectId, m_Pose, sizeof(vr::DriverPose_t));
+		}
+
 		if (this->new_quaternion_avaiable && this->new_vector_avaiable) {
 			m_Pose.qRotation.w = this->quat[0];
 			m_Pose.qRotation.x = this->quat[1];
@@ -183,28 +285,30 @@ void Relativty::CTRLDriver::update_pose_threaded() {
 			m_Pose.vecPosition[0] = this->vector_xyz[0];
 			m_Pose.vecPosition[1] = this->vector_xyz[1];
 			m_Pose.vecPosition[2] = this->vector_xyz[2];
-
+			Relativty::ServerDriver::Log("CTRL| CTRL| Update POSE with vector and rotation\n");
 			vr::VRServerDriverHost()->TrackedDevicePoseUpdated(m_unObjectId, m_Pose, sizeof(vr::DriverPose_t));
 			this->new_quaternion_avaiable = false;
 			this->new_vector_avaiable = false;
 
 		}
-		else if (this->new_quaternion_avaiable) {
+		if (this->new_quaternion_avaiable) {
 			m_Pose.qRotation.w = this->quat[0];
 			m_Pose.qRotation.x = this->quat[1];
 			m_Pose.qRotation.y = this->quat[2];
 			m_Pose.qRotation.z = this->quat[3];
 			//Relativty::ServerDriver::Log("ARCH|\tQuartonian Received\n");
+			Relativty::ServerDriver::Log("CTRL| CTRL| Update POSE with rotation\n");
 			vr::VRServerDriverHost()->TrackedDevicePoseUpdated(m_unObjectId, m_Pose, sizeof(vr::DriverPose_t));
 			this->new_quaternion_avaiable = false;
 
 		}
-		else if (this->new_vector_avaiable) {
+		if (this->new_vector_avaiable) {
 
 			m_Pose.vecPosition[0] = this->vector_xyz[0];
 			m_Pose.vecPosition[1] = this->vector_xyz[1];
 			m_Pose.vecPosition[2] = this->vector_xyz[2];
-			//Relativty::ServerDriver::Log("ARCH|\tVector Received\n");
+			//Relativty::ServerDriver::Log("CTRL| CTRL| Update POSE with vector\n");
+			//Relativty::ServerDriver::Log("ARCH|CTRL \tVector Received\n");
 			vr::VRServerDriverHost()->TrackedDevicePoseUpdated(m_unObjectId, m_Pose, sizeof(vr::DriverPose_t));
 			this->new_vector_avaiable = false;
 
@@ -234,220 +338,229 @@ void Relativty::CTRLDriver::calibrate_quaternion() {
 }
 
 void Relativty::CTRLDriver::retrieve_device_quaternion_packet_threaded() {
-	uint8_t packet_buffer[64];
-	int16_t quaternion_packet[4];
-	//this struct is for mpu9250 support
-#pragma pack(push, 1)
-	struct pak {
-		uint8_t id;
-		float quat[4];
-		uint8_t rest[47];
-	};
-#pragma pack(pop)
-	int result;
-	Relativty::ServerDriver::Log("Thread1: successfully started\n");
+	Relativty::ServerDriver::Log("controller Thread rotation track: successfully started\n");
 	while (this->retrieve_quaternion_isOn) {
-		if (this->bIsSerialComport) {
-			//confirm we are connected. if not. instead ake an attempt to connect and forfiet this read cycle.
+		bool isAvailable = Relativty::ServerDriver::SOCKServer.isNewRotation('R');
+		//Relativty::ServerDriver::Log("ARCH| CTRL| R| is available : " + isAvailable ? "YES\n" : "NO\n");
+		if (!isAvailable)
+			continue;
+		SocketServer::rotationState state = Relativty::ServerDriver::SOCKServer.getRotationState('R');
+		float* rotate = state.rotation;
+		float rotation[4];
 
-			//read some serial in :
+		rotation[0] = rotate[0] + 0.0f;
+		rotation[1] = rotate[1] + 0.0f;
+		rotation[2] = rotate[2] + 0.0f;
+		rotation[3] = rotate[3] + 0.0f;
 
-			std::string jsonString = "";
-			if (!this->bIsStaticRotation) {
-				//Relativty::ServerDriver::Log("ARCH| Begin read in of JSON packet :\n");
-				bool reading = true;
-				bool awaitStart = true;
-				bool awaitEnd = false;
-				int attempt = 64;
+		Relativty::ServerDriver::Log("ARCH| CTRL| R| got out rW " + std::to_string(rotation[0]));
+		Relativty::ServerDriver::Log("ARCH| CTRL| R| got out rX " + std::to_string(rotation[1]));
+		Relativty::ServerDriver::Log("ARCH| CTRL| R| got out rY " + std::to_string(rotation[2]));
+		Relativty::ServerDriver::Log("ARCH| CTRL| R| got out rZ " + std::to_string(rotation[3]));
+		this->invertY = true;
+		this->quat[0] = rotation[0] * (this->invertW ? -1.0f : 1.0f); //W
+		this->quat[1] = rotation[1] * (this->invertX ? -1.0f : 1.0f); //X
+		this->quat[2] = rotation[3] * (this->invertZ ? -1.0f : 1.0f); //Z
+		this->quat[3] = rotation[2] * (this->invertY ? -1.0f : 1.0f); //Y
 
-				//read until "{" - discard any others
-				//then read until "}"
-				while (reading) {
-					attempt--;
-					if (attempt <= 0) {
-						jsonString = ""; // we failed. clear the buffer
-						break;
-					}
-					unsigned char readBuffer;
-					DWORD byteRead;
-					//Relativty::ServerDriver::Log("ARCH| read next\n");
-					result = ReadFile(serialHandle, &readBuffer, 1, &byteRead, NULL);
-					int err = GetLastError();
-					if (err != ERROR_SUCCESS) {
-						Relativty::ServerDriver::Log("ARCH| CTRL| COM| readFile error [" + std::to_string(err) + "]");
-						closeCom();
-						openCom(); //attempt to reconnect
-						break;
-					}
-					if (result) {
-						std::string asString(1, readBuffer);
-						//Relativty::ServerDriver::Log("ARCH| read one '" + asString + "'\n");
-						if (awaitStart && asString == "{") {
-							jsonString += asString;
-							awaitStart = false;
-							awaitEnd = true;
-						}
-						else if (awaitEnd) {
-							jsonString += asString;
-							if (asString == "}") {
-								reading = false;
-								break;
-							}
-						}
-					}
-				}
-			}
-			else {
-				jsonString = "{\"W\":1.00,\"X\":-0.03,\"Y\":0.01,\"Z\":0.03}";
-			}
-			//Relativty::ServerDriver::Log("ARCH| read packet built...\n");
-			//readBuffer[byteReading] = 0; //0 off the bytes
-			if (jsonString.size() > 0) {
-				//Relativty::ServerDriver::Log("ARCH| read in com as string : \"" + jsonString + "\"\n");
-				try {
-					nlohmann::json json = nlohmann::json::parse(jsonString);
-					//Relativty::ServerDriver::Log("ARCH| read in json pretty value as '" + json.dump() + "'\n");
-					//Relativty::ServerDriver::Log("ARCH| read in json X as '" + std::to_string(json["X"].get<float>()) + "'\n");
-					//Relativty::ServerDriver::Log("ARCH| read in json Y as '" + std::to_string(json["Y"].get<float>()) + "'\n");
-					//Relativty::ServerDriver::Log("ARCH| read in json Z as '" + std::to_string(json["Z"].get<float>()) + "'\n");
-					//Relativty::ServerDriver::Log("ARCH| read in json W as '" + std::to_string(json["W"].get<float>()) + "'\n");
-					//Relativty::ServerDriver::Log("ARCH| assign in the quat '" + json.dump() + "'\n");
+		//this->calibrate_quaternion();
 
-					this->quat[0] = json["W"].get<float>();
-					this->quat[1] = json["X"].get<float>() * -1; // pitch
-					this->quat[2] = json["Z"].get<float>();
-					this->quat[3] = json["Y"].get<float>();
-					//Relativty::ServerDriver::Log("ARCH| have assigned in the quat '" + json.dump() + "'\n");
-
-					this->calibrate_quaternion();
-
-					this->new_quaternion_avaiable = true;
-				}
-				catch (nlohmann::json::parse_error& e)
-				{
-					Relativty::ServerDriver::Log("ARCH| CTRL| read in json failed parse '" + std::string(e.what()) + "'\n");
-				}
-
-
-			}
-			else {
-				Relativty::ServerDriver::Log("ARCH| CTRL| read in com as string Failed");
-				//we can try to open the port again ?
-
-			}
-		}
+		this->new_quaternion_avaiable = true;
 	}
 	Relativty::ServerDriver::Log("CTRL| Thread1: successfully stopped\n");
 }
 
-void Relativty::CTRLDriver::retrieve_client_vector_packet_threaded() {
-	WSADATA wsaData;
-	struct sockaddr_in server, client;
-	int addressLen;
-	int receiveBufferLen = 128;
-	char receiveBuffer[128];
-	int resultReceiveLen;
+void Relativty::CTRLDriver::retrieve_client_input_packet_threaded() {
+	Relativty::ServerDriver::Log("controller Thread Input GET; successfully started\n");
+	while (this->retrieve_input_isOn) {
+		if (bIsTrackingInput && Relativty::ServerDriver::SOCKServer.isNewInputs('R')) {
+			SocketServer::inputState state = Relativty::ServerDriver::SOCKServer.getInputState('R');
+			Relativty::ServerDriver::Log("ARCH| CTRL| is tracking input");
+			int bA = state.button[0];
+			int bB = state.button[1];
+			int bC = state.button[2];
+			int bD = state.button[3];
+			int bE = state.button[4];
+			int bF = state.button[5];
+			int bG = state.button[6];
+			int bH = state.button[7];
+			Relativty::ServerDriver::Log("ARCH| CTRL| R| Button A " + std::to_string(bA));
+			Relativty::ServerDriver::Log("ARCH| CTRL| R| Button B " + std::to_string(bB));
+			Relativty::ServerDriver::Log("ARCH| CTRL| R| Button C " + std::to_string(bC));
+			Relativty::ServerDriver::Log("ARCH| CTRL| R| Button D " + std::to_string(bD));
+			Relativty::ServerDriver::Log("ARCH| CTRL| R| Button E " + std::to_string(bE));
+			Relativty::ServerDriver::Log("ARCH| CTRL| R| Button F " + std::to_string(bF));
+			Relativty::ServerDriver::Log("ARCH| CTRL| R| Button G " + std::to_string(bG));
+			Relativty::ServerDriver::Log("ARCH| CTRL| R| Button H " + std::to_string(bH));
+			this->input_bool[0] = bA;
+			this->input_bool[1] = bB;
+			this->input_bool[2] = bC;
 
+			/*
+			vr::VRDriverInput()->CreateBooleanComponent(m_ulPropertyContainer, "/input/application_menu/click", &HButtons[0]); //f
+			vr::VRDriverInput()->CreateBooleanComponent(m_ulPropertyContainer, "/input/system/click", &HButtons[1]); //h
+
+			vr::VRDriverInput()->CreateBooleanComponent(m_ulPropertyContainer, "/input/grip/click", &HButtons[2]); //g
+			vr::VRDriverInput()->CreateBooleanComponent(m_ulPropertyContainer, "/input/trigger/click", &HButtons[3]); //l
+
+			vr::VRDriverInput()->CreateBooleanComponent(m_ulPropertyContainer, "/input/trackpad/click", &HButtons[4]); //j
+			vr::VRDriverInput()->CreateBooleanComponent(m_ulPropertyContainer, "/input/trackpad/touch", &HButtons[5]); //k
+			*/
+
+
+			this->new_input_avaiable = true;
+		}
+	}
+}
+
+void Relativty::CTRLDriver::retrieve_client_vector_packet_threaded() {
+	using Eigen::Vector3;
 	float normalize_min[3]{ this->normalizeMinX, this->normalizeMinY, this->normalizeMinZ};
 	float normalize_max[3]{ this->normalizeMaxX, this->normalizeMaxY, this->normalizeMaxZ};
 	float scales_coordinate_meter[3]{ this->scalesCoordinateMeterX, this->scalesCoordinateMeterY, this->scalesCoordinateMeterZ};
-	float offset_coordinate[3] = { this->offsetCoordinateX, this->offsetCoordinateY, this->offsetCoordinateZ};
+	
 
-	float coordinate[3]{ 0, 0, 0 };
 	float coordinate_normalized[3];
-
-	Relativty::ServerDriver::Log("CTRL| Thread3: Initialising Socket.\n");
-	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
-		Relativty::ServerDriver::Log("CTRL| Thread3: Failed. Error Code: " + WSAGetLastError());
-		return;
-	}
-	Relativty::ServerDriver::Log("CTRL| Thread3: Socket successfully initialised.\n");
-
-	if (!bIsStaticPosition && (this->sock = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET)
-		Relativty::ServerDriver::Log("CTRL| Thread3: could not create socket: " + WSAGetLastError());
-	Relativty::ServerDriver::Log("CTRL| Thread3: Socket created.\n");
-
-	server.sin_family = AF_INET;
-	server.sin_port = htons(50000);
-	server.sin_addr.s_addr = INADDR_ANY;
-
-	if (!bIsStaticPosition && bind(this->sock, (struct sockaddr*) & server, sizeof(server)) == SOCKET_ERROR)
-		Relativty::ServerDriver::Log("CTRL| Thread3: Bind failed with error code: " + WSAGetLastError());
-	Relativty::ServerDriver::Log("CTRL| Thread3: Bind done \n");
-
-	if (!bIsStaticPosition)
-		listen(this->sock, 1);
+	float coordinate_true_center[3];
 
 	this->serverNotReady = false;
 
-	if (!bIsStaticPosition) {
-		Relativty::ServerDriver::Log("Thread3: Waiting for incoming connections...\n");
-		addressLen = sizeof(struct sockaddr_in);
-		this->sock_receive = accept(this->sock, (struct sockaddr*) & client, &addressLen);
-		if (this->sock_receive == INVALID_SOCKET)
-			Relativty::ServerDriver::Log("Thread3: accept failed with error code: " + WSAGetLastError());
-		Relativty::ServerDriver::Log("Thread3: Connection accepted");
-	}
-
 	Relativty::ServerDriver::Log("CTRL| Thread3: successfully started\n");
 	while (this->retrieve_vector_isOn) {
-		if (bIsStaticPosition) {
-			continue;
-		}
-		resultReceiveLen = recv(this->sock_receive, receiveBuffer, receiveBufferLen, NULL);
-		if (resultReceiveLen == -1) {
-			fprintf(stderr, "recv: %s (%d)\n", strerror(errno), errno);
-			Relativty::ServerDriver::Log("ARCH| CTRL| SOCK| recv error [" + std::to_string(errno) + "].");
-			continue;
-		}
-		if (resultReceiveLen > 0) {
-			std::string receiveString = std::string(receiveBuffer);
-			Relativty::ServerDriver::Log("ARCH| CTRL| SOCKET| RAW Received '" + receiveString + "'\n");
-			size_t opens = receiveString.find("{");
-			if (opens != 0) {
-				Relativty::ServerDriver::Log("ARCH| CTRL| SOCKET| Bad packet. Discarding'\n");
-				continue;
+		float offset_coordinate[3] = { this->offsetCoordinateX, this->offsetCoordinateY, this->offsetCoordinateZ };
+		bool isAvailableR = Relativty::ServerDriver::SOCKServer.isNewCoordinates('R');
+		Relativty::ServerDriver::Log("CTRL| is R available : " + std::to_string(isAvailableR) + "\n");
+
+
+		if (GetAsyncKeyState(VK_UP))
+		{
+			if (GetAsyncKeyState(VK_RSHIFT)) {
+				modX -= 0.05f;
 			}
-			size_t close = receiveString.find("}") + 1;
-			receiveString.resize(close);
-			//Relativty::ServerDriver::Log("ARCH| SOCKET| Received '" + receiveString + "'\n");
-			nlohmann::json json = nlohmann::json::parse(receiveString);
-			//Relativty::ServerDriver::Log("CTRL| ARCH| SOCKET| read in json pretty value as '" + json.dump() + "'\n");
-			//Relativty::ServerDriver::Log("CTRL| ARCH| SOCKET| get x\n");
-			coordinate[0] = json["px"].get<float>();
-			//Relativty::ServerDriver::Log("CTRL| ARCH| SOCKET| get y\n");
-			coordinate[1] = json["py"].get<float>();
-			//Relativty::ServerDriver::Log("CTRL| ARCH| SOCKET| get z\n");
-			coordinate[2] = json["pz"].get<float>();
+			else
+			{
+				modX += 0.05f;
+			}
+			
+		}
+		if (GetAsyncKeyState(VK_DOWN))
+		{
+			if (GetAsyncKeyState(VK_RSHIFT)) {
+				modY -= 0.05f;
+			}
+			else
+			{
+				modY += 0.05f;
+			}
+			
+		}
+		if (GetAsyncKeyState(VK_LEFT))
+		{
+			if (GetAsyncKeyState(VK_RSHIFT)) {
+				modZ -= 0.05f;
+			}
+			else
+			{
+				modZ += 0.05f;
+			}
+			
+
+		}
+		Relativty::ServerDriver::Log("Thread3: CTRL ModX is now '" + std::to_string(modX) + "'\n"); // ModX is now '-473.557983'
+		Relativty::ServerDriver::Log("Thread3: CTRL ModY is now '" + std::to_string(modY) + "'\n"); // -423.870026
+		Relativty::ServerDriver::Log("Thread3: CTRL ModZ is now '" + std::to_string(modZ) + "'\n"); //-807.526367
+		bool isAvailable = isAvailableR;
+		if (bIsStaticPosition) {
+			float coordinate[3];
+			coordinate[0] = 0.0f;
+			coordinate[1] = 0.0f;
+			coordinate[2] = 0.0f;
 			Normalize(coordinate_normalized, coordinate, normalize_max, normalize_min, this->upperBound, this->lowerBound, scales_coordinate_meter, offset_coordinate);
-			this->vector_xyz[0] = -coordinate_normalized[1];
-			this->vector_xyz[1] = -coordinate_normalized[2];
-			this->vector_xyz[2] = -coordinate_normalized[0];
+			float rota[4]{ this->quat[0], this->quat[1], this->quat[2], this->quat[3] };
+			Eigen::Vector3f coordinate_normalized_vector = Eigen::Vector3f{ coordinate_normalized[0],coordinate_normalized[1],coordinate_normalized[2] };
+
+			Eigen::Vector3f forward_axis = Eigen::Vector3f{ 1,0,0 };
+
+			Eigen::Vector3f true_center = getControllerTrueCenter(coordinate_normalized_vector, rota , forward_axis, 1);
+			float coordinate_true_center[3] = { true_center[0],true_center[1], true_center[2] };
+			this->vector_xyz[0] = coordinate_normalized[0];
+			this->vector_xyz[1] = coordinate_normalized[1];
+			this->vector_xyz[2] = coordinate_normalized[2];
 			this->new_vector_avaiable = true;
+		} else
 
-			//key binds here :
-			//Relativty::ServerDriver::Log("CTRL| ARCH| SOCKET| get buttons\n");
-			vr::VRDriverInput()->UpdateBooleanComponent(HButtons[0], json["b0"].get<int>() == 1, 0);
-			vr::VRDriverInput()->UpdateBooleanComponent(HButtons[1], json["b1"].get<int>() == 1, 0);
-			vr::VRDriverInput()->UpdateBooleanComponent(HButtons[2], json["b2"].get<int>() == 1, 0);
-			vr::VRDriverInput()->UpdateBooleanComponent(HButtons[3], json["b3"].get<int>() == 1, 0);
-			vr::VRDriverInput()->UpdateBooleanComponent(HButtons[4], json["b4"].get<int>() == 1, 0);
-			vr::VRDriverInput()->UpdateBooleanComponent(HButtons[5], json["b5"].get<int>() == 1, 0);
+		if (isAvailable) {
+			Relativty::ServerDriver::Log("ARCH| CTRL| get state of 'R'\n");
+			SocketServer::coordinateState state = Relativty::ServerDriver::SOCKServer.getCoordinateState('R');
+			float coordinate[3];
+			float* coordinateCapture = state.coordinate;
+			coordinate[0] = coordinateCapture[0];
+			coordinate[1] = coordinateCapture[1];
+			coordinate[2] = coordinateCapture[2];
+			
 
-			vr::VRDriverInput()->UpdateScalarComponent(HAnalog[0], json["b6"].get<float>(), 0); //Trackpad x
-			vr::VRDriverInput()->UpdateScalarComponent(HAnalog[1], json["b7"].get<float>(), 0); //Trackpad y
-			vr::VRDriverInput()->UpdateScalarComponent(HAnalog[2], json["b8"].get<float>(), 0); //Trigger
+			if (this->resetCoordinateOrigin) {
+				//reset so that origin is current coordinates :
+				coordinateOrigin[0] = coordinate[0];
+				coordinateOrigin[1] = coordinate[1];
+				coordinateOrigin[2] = coordinate[2];
+				this->resetCoordinateOrigin = false;
+			}
 
-			//quaternion here :
-			//this->quat[0] = json["qw"].get<float>();
-			//this->quat[1] = json["qx"].get<float>() * -1; // pitch
-			//this->quat[2] = json["qz"].get<float>();
-			//this->quat[3] = json["qy"].get<float>();
-			//Relativty::ServerDriver::Log("CTRL| ARCH| have assigned in the quat '" + json.dump() + "'\n");
+			coordinate[0] = -(coordinateOrigin[0] - coordinate[0]);
+			coordinate[1] = -(coordinateOrigin[1] - coordinate[1]);
+			coordinate[2] = -(coordinateOrigin[2] - coordinate[2]);
 
-			//this->calibrate_quaternion();
+			Relativty::ServerDriver::Log("ARCH| CTRL| R| got out X " + std::to_string(coordinate[0]));
+			Relativty::ServerDriver::Log("ARCH| CTRL| R| got out Y " + std::to_string(coordinate[1]));
+			Relativty::ServerDriver::Log("ARCH| CTRL| R| got out Z " + std::to_string(coordinate[2]));
+			Relativty::ServerDriver::Log("Thread3:CTR ModX is '" + std::to_string(modX) + "'\n");
+			Relativty::ServerDriver::Log("Thread3:CTR ModY is '" + std::to_string(modY) + "'\n");
+			Relativty::ServerDriver::Log("Thread3:CTR ModZ is '" + std::to_string(modZ) + "'\n");
+			//if (applyCoordinates) {
+			const float mod = fScaleBy;
+			Relativty::ServerDriver::Log("ARCH| CTRL| SOCKET| scale by " + std::to_string(mod));
+			coordinate[0] = coordinate[0] * mod;
+			coordinate[1] = coordinate[1] * mod;
+			coordinate[2] = coordinate[2] * mod;
+				
+			Relativty::ServerDriver::Log("ARCH| CTRL| SOCKET| normie");
+			Normalize(coordinate_normalized, coordinate, normalize_max, normalize_min, this->upperBound, this->lowerBound, scales_coordinate_meter, offset_coordinate);
+			float rota[4]{ this->quat[0], this->quat[1], this->quat[2], this->quat[3] };
+			Eigen::Vector3f coordinate_normalized_vector = Eigen::Vector3f{ coordinate_normalized[0],-coordinate_normalized[1],-coordinate_normalized[2] };
 
-			//this->new_quaternion_avaiable = true;
+			Eigen::Vector3f forward_axis = Eigen::Vector3f{ 0,0,1 };
+			//this->OffsetDistance = 0.0f;
+			if (GetAsyncKeyState(0x57)) //W key
+				this->OffsetDistance = this->OffsetDistance + 0.01f;
+
+			if (GetAsyncKeyState(0x45)) //# key
+				this->OffsetDistance = this->OffsetDistance - 0.01f;
+
+			if (GetAsyncKeyState(0x51) && GetAsyncKeyState(0xA4)) //Q? key
+				this->resetCoordinateOrigin = true;
+
+			Relativty::ServerDriver::Log("ARCH| CTRL| OFFSET DISANCE IS " + std::to_string(OffsetDistance) + "\n",true);
+
+
+			Eigen::Vector3f true_center = getControllerTrueCenter(coordinate_normalized_vector, rota, forward_axis, OffsetDistance);
+			float coordinate_true_center[3] = { true_center[0] + modX,true_center[1] + modY, true_center[2] + modZ };
+
+			//float rota[4]{ this->quat[0], this->quat[1], this->quat[2], this->quat[3] };
+			//Relativty::ServerDriver::Log("Thread3: use Axis Angle '" + this->axisAngleManager.getAxisAngleName() + "' & distance '" + std::to_string(LEDIMUDistance) + "'\n");
+			
+			//Eigen::Vector3f coordinate_true_center = Eigen::Vector3f{ coordinate_normalized[1],coordinate_normalized[2], coordinate_normalized[0] };
+
+			//Eigen::Vector3f true_center = getControllerTrueCenter(coordinate_true_center, rota, this->axisAngleManager.getAxisAngle(), this->LEDIMUDistance);
+				
+			this->vector_xyz[0] = coordinate_true_center[0];
+			this->vector_xyz[1] = coordinate_true_center[1];
+			this->vector_xyz[2] = coordinate_true_center[2];
+
+			Relativty::ServerDriver::Log("RED CONTROLLER POSE POSITION RESOLVED TO (" + std::to_string(vector_xyz[0]) + ", " + std::to_string(vector_xyz[1]) + ", " + std::to_string(vector_xyz[2]) + ")\n");
+
+
+			this->new_vector_avaiable = true;
 		}
 	}
 	Relativty::ServerDriver::Log("CTRL| Thread3: successfully stopped\n");
@@ -458,8 +571,9 @@ Relativty::CTRLDriver::CTRLDriver(std::string myserial):RelativtyDevice(myserial
 	// keys for use with the settings API
 	static const char* const Relativty_ctrl_section = "Relativty_ctrl";
 
+
 	// openvr api stuff
-	m_sRenderModelPath = "C:\\Users\\Arch\\Documents\\SteamVR\\Relativty\Relativty\\Relativty_Driver\\Relativty\\resources\\rendermodels\\generic_hmd";
+	m_sRenderModelPath = "C:\\Users\\Arch\\Documents\\SteamVR\\Relativty\\Relativty\\Relativty_Driver\\Relativty\\resources\\rendermodels\\generic_ctrl";
 	m_sBindPath = "{Relativty}/input/relativty_hmd_profile.json";
 
 	m_spExtDisplayComp = std::make_shared<Relativty::RelativtyExtendedDisplayComponent>();
@@ -486,6 +600,24 @@ Relativty::CTRLDriver::CTRLDriver(std::string myserial):RelativtyDevice(myserial
 	this->offsetCoordinateY = vr::VRSettings()->GetFloat(Relativty_ctrl_section, "offsetCoordinateY");
 	this->offsetCoordinateZ = vr::VRSettings()->GetFloat(Relativty_ctrl_section, "offsetCoordinateZ");
 
+	float axisAngleX = vr::VRSettings()->GetFloat(Relativty_ctrl_section, "axisAngleX");
+	float axisAngleY = vr::VRSettings()->GetFloat(Relativty_ctrl_section, "axisAngleY");
+	float axisAngleZ = vr::VRSettings()->GetFloat(Relativty_ctrl_section, "axisAngleZ");
+
+	float LEDIMUDx = vr::VRSettings()->GetFloat(Relativty_ctrl_section, "LEDIMUDistance");
+
+	this->axisAngle[0] = axisAngleX;
+	this->axisAngle[0] = axisAngleY;
+	this->axisAngle[0] = axisAngleZ;
+
+	this->LEDIMUDistance = LEDIMUDx;
+
+	this->fScaleBy = vr::VRSettings()->GetFloat(Relativty_ctrl_section, "scaleBy");
+
+	this->modX = vr::VRSettings()->GetFloat(Relativty_ctrl_section, "modX");
+	this->modY = vr::VRSettings()->GetFloat(Relativty_ctrl_section, "modY");
+	this->modZ = vr::VRSettings()->GetFloat(Relativty_ctrl_section, "modZ");
+
 	this->m_iPid = vr::VRSettings()->GetInt32(Relativty_ctrl_section, "ctrlPid");
 	this->m_iVid = vr::VRSettings()->GetInt32(Relativty_ctrl_section, "ctrlVid");
 
@@ -500,6 +632,14 @@ Relativty::CTRLDriver::CTRLDriver(std::string myserial):RelativtyDevice(myserial
 
 	this->bIsStaticPosition = !vr::VRSettings()->GetBool(Relativty_ctrl_section, "willTrackPosition");
 	this->bIsStaticRotation = !vr::VRSettings()->GetBool(Relativty_ctrl_section, "willTrackRotation");
+	this->bIsTrackingInput = vr::VRSettings()->GetBool(Relativty_ctrl_section, "willTrackInput");
+
+	for (int i = 0; i < 6; i++)
+	{
+		std::string strrr = "B" + std::to_string(i);
+		this->binding.buttons[i] = vr::VRSettings()->GetInt32(Relativty_ctrl_section, strrr.c_str());
+	}
+	
 
 	char buffer[1024];
 	vr::VRSettings()->GetString(Relativty_ctrl_section, "PyPath", buffer, sizeof(buffer));
@@ -528,15 +668,15 @@ inline void Relativty::CTRLDriver::setProperties() {
 		5 l
 	*/
 	vr::VRDriverInput()->CreateBooleanComponent(m_ulPropertyContainer, "/input/application_menu/click", &HButtons[0]); //f
-	vr::VRDriverInput()->CreateBooleanComponent(m_ulPropertyContainer, "/input/system/click", &HButtons[2]); //h
+	vr::VRDriverInput()->CreateBooleanComponent(m_ulPropertyContainer, "/input/system/click", &HButtons[1]); //h //Button C
 
-	vr::VRDriverInput()->CreateBooleanComponent(m_ulPropertyContainer, "/input/grip/click", &HButtons[1]); //g
-	vr::VRDriverInput()->CreateBooleanComponent(m_ulPropertyContainer, "/input/trigger/click", &HButtons[5]); //l
+	vr::VRDriverInput()->CreateBooleanComponent(m_ulPropertyContainer, "/input/a/click", &HButtons[2]); //g //V
+	vr::VRDriverInput()->CreateBooleanComponent(m_ulPropertyContainer, "/input/b/click", &HButtons[3]); //l //B
 
-	vr::VRDriverInput()->CreateBooleanComponent(m_ulPropertyContainer, "/input/trackpad/click", &HButtons[3]); //j
-	vr::VRDriverInput()->CreateBooleanComponent(m_ulPropertyContainer, "/input/trackpad/touch", &HButtons[4]); //k
+	vr::VRDriverInput()->CreateBooleanComponent(m_ulPropertyContainer, "/input/trackpad/click", &HButtons[4]); //j
+	vr::VRDriverInput()->CreateBooleanComponent(m_ulPropertyContainer, "/input/trackpad/touch", &HButtons[5]); //k
 
-	vr::VRDriverInput()->CreateScalarComponent(m_ulPropertyContainer, "/input/trackpad/x", &HAnalog[0], vr::VRScalarType_Absolute, vr::VRScalarUnits_NormalizedTwoSided);
-	vr::VRDriverInput()->CreateScalarComponent(m_ulPropertyContainer, "/input/trackpad/y", &HAnalog[1], vr::VRScalarType_Absolute, vr::VRScalarUnits_NormalizedTwoSided);
+	vr::VRDriverInput()->CreateScalarComponent(m_ulPropertyContainer, "/input/thumbstick/x", &HAnalog[0], vr::VRScalarType_Absolute, vr::VRScalarUnits_NormalizedTwoSided);
+	vr::VRDriverInput()->CreateScalarComponent(m_ulPropertyContainer, "/input/thumbstick/y", &HAnalog[1], vr::VRScalarType_Absolute, vr::VRScalarUnits_NormalizedTwoSided);
 	vr::VRDriverInput()->CreateScalarComponent(m_ulPropertyContainer, "/input/trigger/value", &HAnalog[2], vr::EVRScalarType::VRScalarType_Absolute, vr::EVRScalarUnits::VRScalarUnits_NormalizedOneSided);
 }

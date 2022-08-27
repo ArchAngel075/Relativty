@@ -35,6 +35,8 @@
 
 #include "Relativty_SocketServer.hpp"
 
+#include <Eigen/Geometry>
+
 #include <errno.h>
 #include <string>
 
@@ -135,7 +137,7 @@ void Relativty::HMDDriver::openCom() {
 		return;
 	serialHandle = CreateFileW(comport.c_str(), GENERIC_READ | GENERIC_WRITE, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	if (serialHandle == INVALID_HANDLE_VALUE) {
-		Relativty::ServerDriver::Log("COM: COM initialization failed. \"" + comportRAW + "\"\n");
+		//Relativty::ServerDriver::Log("COM: COM initialization failed. \"" + comportRAW + "\"\n");
 	}
 	else {
 		Relativty::ServerDriver::Log("COM: COM opened. \n");
@@ -199,6 +201,8 @@ void Relativty::HMDDriver::Deactivate() {
 void Relativty::HMDDriver::update_pose_threaded() {
 	Relativty::ServerDriver::Log("Thread2: successfully started\n");
 	while (m_unObjectId != vr::k_unTrackedDeviceIndexInvalid) {
+		
+
 		if (this->new_quaternion_avaiable && this->new_vector_avaiable) {
 			m_Pose.qRotation.w = this->quat[0];
 			m_Pose.qRotation.x = this->quat[1];
@@ -208,10 +212,6 @@ void Relativty::HMDDriver::update_pose_threaded() {
 			m_Pose.vecPosition[0] = this->vector_xyz[0];
 			m_Pose.vecPosition[1] = this->vector_xyz[1];
 			m_Pose.vecPosition[2] = this->vector_xyz[2];
-
-			m_Pose.vecDriverFromHeadTranslation[0] = double(10);
-			m_Pose.vecDriverFromHeadTranslation[1] = double(0);
-			m_Pose.vecDriverFromHeadTranslation[2] = double(0);
 
 			vr::VRServerDriverHost()->TrackedDevicePoseUpdated(m_unObjectId, m_Pose, sizeof(vr::DriverPose_t));
 			this->new_quaternion_avaiable = false;
@@ -231,10 +231,10 @@ void Relativty::HMDDriver::update_pose_threaded() {
 			m_Pose.vecPosition[0] = this->vector_xyz[0];
 			m_Pose.vecPosition[1] = this->vector_xyz[1];
 			m_Pose.vecPosition[2] = this->vector_xyz[2];
-			Relativty::ServerDriver::Log("ARCH|\tVector Received\n");
-			Relativty::ServerDriver::Log("ARCH| V| X " + std::to_string(vector_xyz[0]));
-			Relativty::ServerDriver::Log("ARCH| V| Y " + std::to_string(vector_xyz[1]));
-			Relativty::ServerDriver::Log("ARCH| V| Z " + std::to_string(vector_xyz[2]));
+			//Relativty::ServerDriver::Log("ARCH|\tVector Received\n");
+			//Relativty::ServerDriver::Log("ARCH| V| X " + std::to_string(vector_xyz[0]));
+			//Relativty::ServerDriver::Log("ARCH| V| Y " + std::to_string(vector_xyz[1]));
+			//Relativty::ServerDriver::Log("ARCH| V| Z " + std::to_string(vector_xyz[2]));
 			vr::VRServerDriverHost()->TrackedDevicePoseUpdated(m_unObjectId, m_Pose, sizeof(vr::DriverPose_t));
 			this->new_vector_avaiable = false;
 
@@ -262,8 +262,9 @@ void Relativty::HMDDriver::calibrate_quaternion() {
 	this->quat[2] = qres[2];
 	this->quat[3] = qres[3];
 }
-
+using Relativty::SocketServer;
 void Relativty::HMDDriver::retrieve_device_quaternion_packet_threaded() {
+	using Eigen::Quaternion;
 	uint8_t packet_buffer[64];
 	int16_t quaternion_packet[4];
 	//this struct is for mpu9250 support
@@ -278,148 +279,86 @@ void Relativty::HMDDriver::retrieve_device_quaternion_packet_threaded() {
 	Relativty::ServerDriver::Log("Thread1: successfully started\n");
 	while (this->retrieve_quaternion_isOn) {
 		if (this->bIsSerialComport) {
-			//confirm we are connected. if not. instead ake an attempt to connect and forfiet this read cycle.
-
-			//read some serial in :
+			int leng = 96;
+			try
+			{
+				//confirm we are connected. if not. instead ake an attempt to connect and forfiet this read cycle.
 			
-			std::string jsonString = "";
-			if (!this->bIsStaticRotation) {
-				//Relativty::ServerDriver::Log("ARCH| Begin read in of JSON packet :\n");
-				bool reading = true;
-				bool awaitStart = true;
-				bool awaitEnd = false;
-				int attempt = 64;
+				char readBuffer[96];
+				DWORD bytesRead;
+				//read some serial in :
+				//Relativty::ServerDriver::Log("ARCH| read next\n");
+				result = ReadFile(serialHandle, &readBuffer, leng, &bytesRead, NULL);
+				int err = GetLastError();
+				if (err != ERROR_SUCCESS) {
+					//Relativty::ServerDriver::Log("ARCH| HMD| COM| readFile error [" + std::to_string(err) + "]");
+					closeCom();
+					openCom(); //attempt to reconnect
+					continue;
+				}
+				if (result) {
+					int i = 0;
+					std::string stringy = std::string(readBuffer);
+					Relativty::ServerDriver::Log("ARCH| HMD| GOT DATA -> " + stringy + "\n");
 
-				//read until "{" - discard any others
-				//then read until "}"
-				while (reading) {
-					attempt--;
-					if (attempt <= 0) {
-						jsonString = ""; // we failed. clear the buffer
-						break;
+					//1. process data for valid json.
+					//2. retrieve X, Y, Z, W values and apply
+					//hand over to SocketServer to manage the packet data processing.
+					//find {
+					size_t openBracket = stringy.find("{", i);
+					if (openBracket == std::string::npos) {
+						continue;
 					}
-					unsigned char readBuffer;
-					DWORD byteRead;
-					//Relativty::ServerDriver::Log("ARCH| read next\n");
-					result = ReadFile(serialHandle, &readBuffer, 1, &byteRead, NULL);
-					int err = GetLastError();
-					if (err != ERROR_SUCCESS) {
-						Relativty::ServerDriver::Log("ARCH| HMD| COM| readFile error [" + std::to_string(err) + "]");
-						closeCom();
-						openCom(); //attempt to reconnect
-						break;
+					//Relativty::ServerDriver::Log("ARCH| HMD| open bracket -> " + std::to_string(openBracket) + "\n");
+
+					size_t closeBracket = stringy.find("}", openBracket);
+					if (closeBracket == std::string::npos) {
+						continue;
 					}
-					if (result) {
-						std::string asString(1, readBuffer);
-						//Relativty::ServerDriver::Log("ARCH| read one '" + asString + "'\n");
-						if (awaitStart && asString == "{") {
-							jsonString += asString;
-							awaitStart = false;
-							awaitEnd = true;
-						}
-						else if (awaitEnd) {
-							jsonString += asString;
-							if (asString == "}") {
-								reading = false;
-								break;
-							}
-						}
-					}
+					//Relativty::ServerDriver::Log("ARCH| HMD| close bracket -> " + std::to_string(closeBracket) + "\n");
+
+					stringy = stringy.substr(openBracket, closeBracket - openBracket + 1);
+					Relativty::ServerDriver::Log("ARCH| HMD| snipped -> " + stringy + "\n");
+					Relativty::ServerDriver::SOCKServer.processRotationPacket(stringy);
 				}
+			
+				//here we process local and send over in quat;
 			}
-			else {
-				jsonString = "{\"W\":1.00,\"X\":0.00,\"Y\":0.00,\"Z\":0.00}";
+			catch (const std::exception&)
+			{
+				//Do nothing
 			}
-			//Relativty::ServerDriver::Log("ARCH| read packet built...\n");
-			//readBuffer[byteReading] = 0; //0 off the bytes
-			if (jsonString.size() > 0) {
-				//Relativty::ServerDriver::Log("ARCH| read in com as string : \"" + jsonString + "\"\n");
-				try {
-					nlohmann::json json = nlohmann::json::parse(jsonString);
-					//Relativty::ServerDriver::Log("ARCH| read in json pretty value as '" + json.dump() + "'\n");
-					//Relativty::ServerDriver::Log("ARCH| read in json X as '" + std::to_string(json["X"].get<float>()) + "'\n");
-					//Relativty::ServerDriver::Log("ARCH| read in json Y as '" + std::to_string(json["Y"].get<float>()) + "'\n");
-					//Relativty::ServerDriver::Log("ARCH| read in json Z as '" + std::to_string(json["Z"].get<float>()) + "'\n");
-					//Relativty::ServerDriver::Log("ARCH| read in json W as '" + std::to_string(json["W"].get<float>()) + "'\n");
-					//Relativty::ServerDriver::Log("ARCH| assign in the quat '" + json.dump() + "'\n");
+		}
+		
+		if (!this->bIsStaticRotation) {
+			bool isAvailable = Relativty::ServerDriver::SOCKServer.isNewRotation('B');
+			if (!isAvailable)
+				continue;
 
-					this->quat[0] = json["W"].get<float>();
-					this->quat[1] = json["X"].get<float>() * -1; // pitch
-					this->quat[2] = json["Z"].get<float>();
-					this->quat[3] = json["Y"].get<float>();
-					//Relativty::ServerDriver::Log("ARCH| have assigned in the quat '" + json.dump() + "'\n");
+			SocketServer::rotationState state = Relativty::ServerDriver::SOCKServer.getRotationState('B');
+			float* rotate = state.rotation;
+			float rotation[4];
 
-					this->calibrate_quaternion();
+			rotation[0] = rotate[0];
+			rotation[1] = rotate[1];
+			rotation[2] = rotate[2];
+			rotation[3] = rotate[3];
 
-					this->new_quaternion_avaiable = true;
-				}
-				catch (nlohmann::json::parse_error& e)
-				{
-					Relativty::ServerDriver::Log("ARCH| read in json failed parse '" + std::string(e.what()) + "'\n");
-				}
-				
-				
-			} else {
-				const char* strr = BoolToString(bIsStaticRotation);
+			Relativty::ServerDriver::Log("ARCH| CTRL| B| got out rW " + std::to_string(rotation[0]));
+			Relativty::ServerDriver::Log("ARCH| CTRL| B| got out rX " + std::to_string(rotation[1]));
+			Relativty::ServerDriver::Log("ARCH| CTRL| B| got out rY " + std::to_string(rotation[2]));
+			Relativty::ServerDriver::Log("ARCH| CTRL| B| got out rZ " + std::to_string(rotation[3]));
 
-				Relativty::ServerDriver::Log("ARCH| read in com as string Failed. bIsStaticRotation [");
-				Relativty::ServerDriver::Log(strr);
-				Relativty::ServerDriver::Log("]\n");
-				//we can try to open the port again ?
-
-			}
-		} else {
-			result = hid_read(this->handle, packet_buffer, 64); //Result should be greater than 0.
-			if (result > 0) {
+			this->quat[0] = rotation[0] * 1.0f;//W
+			this->quat[1] = rotation[1] * 1.0f;//X OK
+			this->quat[2] = rotation[3] * 1.0f;//Y OK
+			this->quat[3] = rotation[2] * -1.0f;//Z OK
+			
+			//this->calibrate_quaternion();
 
 
-				if (m_bIMUpktIsDMP) {
-
-					quaternion_packet[0] = ((packet_buffer[1] << 8) | packet_buffer[2]);
-					quaternion_packet[1] = ((packet_buffer[5] << 8) | packet_buffer[6]);
-					quaternion_packet[2] = ((packet_buffer[9] << 8) | packet_buffer[10]);
-					quaternion_packet[3] = ((packet_buffer[13] << 8) | packet_buffer[14]);
-					this->quat[0] = static_cast<float>(quaternion_packet[0]) / 16384.0f;
-					this->quat[1] = static_cast<float>(quaternion_packet[1]) / 16384.0f;
-					this->quat[2] = static_cast<float>(quaternion_packet[2]) / 16384.0f;
-					this->quat[3] = static_cast<float>(quaternion_packet[3]) / 16384.0f;
-
-					float qres[4];
-					qres[0] = quat[0];
-					qres[1] = quat[1];
-					qres[2] = -1 * quat[2];
-					qres[3] = -1 * quat[3];
-
-					this->quat[0] = qres[0];
-					this->quat[1] = qres[1];
-					this->quat[2] = qres[2];
-					this->quat[3] = qres[3];
-
-					this->calibrate_quaternion();
-
-					this->new_quaternion_avaiable = true;
-
-				}
-				else {
-
-					pak* recv = (pak*)packet_buffer;
-					this->quat[0] = recv->quat[0];
-					this->quat[1] = recv->quat[1];
-					this->quat[2] = recv->quat[2];
-					this->quat[3] = recv->quat[3];
-
-					this->calibrate_quaternion();
-
-					this->new_quaternion_avaiable = true;
-
-				}
-
-
-			}
-			else {
-				Relativty::ServerDriver::Log("Thread1: Issue while trying to read USB\n");
-			}
-		} 
+			this->new_quaternion_avaiable = true;
+		}
 	}
 	Relativty::ServerDriver::Log("Thread1: successfully stopped\n");
 }
@@ -430,51 +369,75 @@ void Relativty::HMDDriver::retrieve_client_vector_packet_threaded() {
 	float scales_coordinate_meter[3]{ this->scalesCoordinateMeterX, this->scalesCoordinateMeterY, this->scalesCoordinateMeterZ};
 	float offset_coordinate[3] = { this->offsetCoordinateX, this->offsetCoordinateY, this->offsetCoordinateZ};
 
-	//float coordinate[3]{ 0,0,0 };
-
-
 	float coordinate_normalized[3];
 
 	Relativty::ServerDriver::Log("Thread3: Initialising Socket Server.\n");
 
-
-	//if (!bIsStaticPosition) {
-	//}
-
 	this->serverNotReady = false;
 
-
 	Relativty::ServerDriver::Log("Thread3: successfully started\n");
+	const float mod = fScaleBy;
 	while (this->retrieve_vector_isOn) {
+		
 		if (bIsStaticPosition) {
-			continue;
-		}
-		//get blue coordinates :
-		bool isBAvailale = Relativty::ServerDriver::SOCKServer.isAvailable('B');
-		if(isBAvailale){
-			Relativty::ServerDriver::Log("ARCH| HMD| would get state of 'B' : " + std::to_string(isBAvailale) + "\n");
-			Relativty::ServerDriver::Log("ARCH| HMD| get state of 'B'\n");
-			SocketServer::deviceState state = Relativty::ServerDriver::SOCKServer.getState('B');
 			float coordinate[3];
-			float *coordinateCapture = state.coordinate;
-			coordinate[0] = coordinateCapture[0];
-			coordinate[1] = coordinateCapture[1];
-			coordinate[2] = coordinateCapture[2];
-			Relativty::ServerDriver::Log("ARCH| B| got out X " + std::to_string(coordinate[0]));
-			Relativty::ServerDriver::Log("ARCH| B| got out Y " + std::to_string(coordinate[1]));
-			Relativty::ServerDriver::Log("ARCH| B| got out Z " + std::to_string(coordinate[2]));
-			//if (applyCoordinates) {
-			const float mod = fScaleBy;
-			Relativty::ServerDriver::Log("ARCH| SOCKET| scale by " + std::to_string(fScaleBy));
-			coordinate[0] = coordinate[0] * mod;
-			coordinate[1] = coordinate[1] * mod;
-			coordinate[2] = coordinate[2] * mod;
-			Relativty::ServerDriver::Log("ARCH| SOCKET| normie");
+			coordinate[0] = 0;
+			coordinate[1] = 0;
+			coordinate[2] = 0;
 			Normalize(coordinate_normalized, coordinate, normalize_max, normalize_min, this->upperBound, this->lowerBound, scales_coordinate_meter, offset_coordinate);
 			this->vector_xyz[0] = coordinate_normalized[1];
 			this->vector_xyz[1] = coordinate_normalized[2];
 			this->vector_xyz[2] = coordinate_normalized[0];
 			this->new_vector_avaiable = true;
+		}
+		else {
+			//get blue coordinates :
+			bool isAvailable = Relativty::ServerDriver::SOCKServer.isNewCoordinates('B');
+			
+			if (isAvailable) {
+				Relativty::ServerDriver::Log("ARCH| HMD| would get state of 'B' : " + std::to_string(isAvailable) + "\n");
+				Relativty::ServerDriver::Log("ARCH| HMD| get state of 'B'\n");
+				SocketServer::coordinateState state = Relativty::ServerDriver::SOCKServer.getCoordinateState('B');
+				float coordinate[3];
+				float* coordinateCapture = state.coordinate;
+				coordinate[0] = coordinateCapture[0] ;
+				coordinate[1] = coordinateCapture[1] ;
+				coordinate[2] = coordinateCapture[2] ;
+
+				if (this->resetCoordinateOrigin) {
+					//reset so that origin is current coordinates :
+					coordinateOrigin[0] = coordinate[0];
+					coordinateOrigin[1] = coordinate[1];
+					coordinateOrigin[2] = coordinate[2];
+					this->resetCoordinateOrigin = false;
+				}
+
+				if (GetAsyncKeyState(0x51) && GetAsyncKeyState(0xA0)) //shift Q? key
+					this->resetCoordinateOrigin = true;
+
+				coordinate[0] = -(coordinateOrigin[0] - coordinate[0]);
+				coordinate[1] = -(coordinateOrigin[1] - coordinate[1]);
+				coordinate[2] = -(coordinateOrigin[2] - coordinate[2]);
+
+
+				Relativty::ServerDriver::Log("ARCH| G| got out X " + std::to_string(coordinate[0]));
+				Relativty::ServerDriver::Log("ARCH| G| got out Y " + std::to_string(coordinate[1]));
+				Relativty::ServerDriver::Log("ARCH| G| got out Z " + std::to_string(coordinate[2]));
+				Relativty::ServerDriver::Log("Thread3:HMD ModX is '" + std::to_string(modX) + "'\n");
+				Relativty::ServerDriver::Log("Thread3:HMD ModY is '" + std::to_string(modY) + "'\n");
+				Relativty::ServerDriver::Log("Thread3:HMD ModZ is '" + std::to_string(modZ) + "'\n");
+				//if (applyCoordinates) {
+				Relativty::ServerDriver::Log("ARCH| SOCKET| scale by " + std::to_string(fScaleBy));
+				coordinate[0] = coordinate[0] * mod;
+				coordinate[1] = coordinate[1] * mod;
+				coordinate[2] = coordinate[2] * mod;
+				Relativty::ServerDriver::Log("ARCH| SOCKET| normie");
+				Normalize(coordinate_normalized, coordinate, normalize_max, normalize_min, this->upperBound, this->lowerBound, scales_coordinate_meter, offset_coordinate);
+				this->vector_xyz[0] = -coordinate_normalized[1] + modY;
+				this->vector_xyz[1] = -coordinate_normalized[2] + modZ;
+				this->vector_xyz[2] =  coordinate_normalized[0] + modX; 
+				this->new_vector_avaiable = true;
+			}
 		}
 		/*
 		*/
@@ -505,7 +468,7 @@ Relativty::HMDDriver::HMDDriver(std::string myserial):RelativtyDevice(myserial, 
 	m_spExtDisplayComp = std::make_shared<Relativty::RelativtyExtendedDisplayComponent>();
 
 	// not openvr api stuff
-	Relativty::ServerDriver::Log("Loading Settings\n");
+	Relativty::ServerDriver::Log("Loading HMD Settings\n");
 	this->IPD = vr::VRSettings()->GetFloat(Relativty_hmd_section, "IPDmeters");
 	this->SecondsFromVsyncToPhotons = vr::VRSettings()->GetFloat(Relativty_hmd_section, "secondsFromVsyncToPhotons");
 	this->DisplayFrequency = vr::VRSettings()->GetFloat(Relativty_hmd_section, "displayFrequency");
@@ -519,6 +482,11 @@ Relativty::HMDDriver::HMDDriver(std::string myserial):RelativtyDevice(myserial, 
 	this->normalizeMaxX = vr::VRSettings()->GetFloat(Relativty_hmd_section, "normalizeMaxX");
 	this->normalizeMaxY = vr::VRSettings()->GetFloat(Relativty_hmd_section, "normalizeMaxY");
 	this->normalizeMaxZ = vr::VRSettings()->GetFloat(Relativty_hmd_section, "normalizeMaxZ");
+
+	this->modX = vr::VRSettings()->GetFloat(Relativty_hmd_section, "modX");
+	this->modY = vr::VRSettings()->GetFloat(Relativty_hmd_section, "modY");
+	this->modZ = vr::VRSettings()->GetFloat(Relativty_hmd_section, "modZ");
+
 	this->scalesCoordinateMeterX = vr::VRSettings()->GetFloat(Relativty_hmd_section, "scalesCoordinateMeterX");
 	this->scalesCoordinateMeterY = vr::VRSettings()->GetFloat(Relativty_hmd_section, "scalesCoordinateMeterY");
 	this->scalesCoordinateMeterZ = vr::VRSettings()->GetFloat(Relativty_hmd_section, "scalesCoordinateMeterZ");

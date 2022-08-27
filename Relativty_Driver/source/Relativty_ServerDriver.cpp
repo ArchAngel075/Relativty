@@ -29,7 +29,7 @@ vr::EVRInitError Relativty::ServerDriver::Init(vr::IVRDriverContext* DriverConte
 	}
 	#ifdef DRIVERLOG_H
 	InitDriverLog(vr::VRDriverLog());
-	DriverLog("Relativty driver version 0.1.1 | Modified v2"); // report driver version
+	DriverLog("Relativty driver version 0.1.1 | Modified v3"); // report driver version
 	DriverLog("Thread1: hid quaternion packet listener loop");
 	DriverLog("Thread2: update driver pose loop");
 	DriverLog("Thread3: receive positional data from python loop");
@@ -45,9 +45,9 @@ vr::EVRInitError Relativty::ServerDriver::Init(vr::IVRDriverContext* DriverConte
 	vr::VRServerDriverHost()->TrackedDeviceAdded(HMDDriver->GetSerialNumber().c_str(), vr::ETrackedDeviceClass::TrackedDeviceClass_HMD, this->HMDDriver);
 
 
-	//this->Log("Relativty boot CTRL device.\n");
-	//this->CTRLDriver = new Relativty::CTRLDriver("one");
-	//vr::VRServerDriverHost()->TrackedDeviceAdded(CTRLDriver->GetSerialNumber().c_str(), vr::ETrackedDeviceClass::TrackedDeviceClass_Controller, this->CTRLDriver);
+	this->Log("Relativty boot CTRL device.\n");
+	this->CTRLDriver = new Relativty::CTRLDriver("one");
+	vr::VRServerDriverHost()->TrackedDeviceAdded(CTRLDriver->GetSerialNumber().c_str(), vr::ETrackedDeviceClass::TrackedDeviceClass_Controller, this->CTRLDriver);
 
 	
 	//vr::VRServerDriverHost()->TrackedDeviceAdded
@@ -103,8 +103,9 @@ void Relativty::ServerDriver::LeaveStandby() {
 
 }
 
-void Relativty::ServerDriver::Log(std::string log) {
-	vr::VRDriverLog()->Log(log.c_str());
+void Relativty::ServerDriver::Log(std::string log, bool shall) {
+	if(shall)
+		vr::VRDriverLog()->Log(log.c_str());
 }
 
 void Relativty::ServerDriver::worker_threader()
